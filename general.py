@@ -10,6 +10,15 @@ class Text:
         self.normalised_plaintext = None
         self.suppressed_plaintext = None
 
+    # class to string conversion
+    def __str__(self):
+        if self.suppressed_plaintext:
+            return self.suppressed_plaintext
+        elif self.normalised_plaintext:
+            return self.normalised_plaintext
+        else:
+            return self.plaintext
+    
     # transforming language specific letters to latin alphabet
     def normalise(self):
         self.normalised_plaintext = unidecode(self.plaintext)
@@ -38,10 +47,13 @@ def frequencies(item):
 
 # tests
 if __name__ == "__main__":
-    '''
     asd = Text("Chroń pułk twój i sześć flag")
+    print(asd)
     asd.normalise()
+    print(asd)
     asd.suppress()
+    print(asd)
+    '''
     print(asd.normalised_plaintext)
     print(asd.suppressed_plaintext)
     print(asd.frequencies(asd.suppressed_plaintext))
@@ -50,7 +62,7 @@ if __name__ == "__main__":
     abc.normalise()
     abc.suppress()
     print(abc.frequencies(abc.suppressed_plaintext))
-    '''
+    # performance tests
     import time, caesar, caesar_trans
     a = open("pt.txt", "r", encoding="utf8").read()
     b=Text(a)
@@ -64,3 +76,5 @@ if __name__ == "__main__":
     caesar_trans.cipher(str(b),"13")
     b2=time.perf_counter()
     print(a2-a1,b2-b1)
+    ## ogromna różnica w wydajności, na korzyść metody maketrans
+    '''

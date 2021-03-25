@@ -1,15 +1,17 @@
 # simple monoalphabetic rotation cipher with natural number as key
+# TOO SLOW, SUCCEEDED BY CAESAR_TRANS
 
 def correct(enc_key):
     if enc_key.isdigit():
         return True
     return False
 
+
 def cipher(text, enc_key):
     if not correct(enc_key):
         return False
     output = ""
-    enc_key=int(enc_key)
+    enc_key = int(enc_key)
     for ch in text:
         if 64 < ord(ch) < 91:
             output += chr((enc_key + ord(ch) - 65) % 26 + 65)
@@ -19,11 +21,12 @@ def cipher(text, enc_key):
             output += ch
     return output
 
+
 def decipher(text, enc_key):
     if not correct(enc_key):
         return False
     output = ""
-    enc_key=int(enc_key)
+    enc_key = int(enc_key)
     for ch in text:
         if 64 < ord(ch) < 91:
             output += chr((-enc_key + ord(ch) - 65) % 26 + 65)
