@@ -34,17 +34,6 @@ class Text:
             self.suppressed_plaintext = temp_text
 
 
-# counting frequency of character in given text
-def frequencies(item):
-    freq_dict = {}
-    for char in item:
-        if char in freq_dict.keys():
-            freq_dict[char] += 1
-        else:
-            freq_dict[char] = 0
-    return freq_dict
-
-
 # tests
 if __name__ == "__main__":
     asd = Text("Chroń pułk twój i sześć flag")

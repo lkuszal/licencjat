@@ -24,7 +24,7 @@ def decipher(text, enc_key):
         return False
     enc_key = int(enc_key) % len(alph_L_EN)
     table = str.maketrans(alph_L_EN[enc_key:] + alph_L_EN[:enc_key] +
-                          alph_U_EN[enc_key:] + alph_U_EN[:enc_key],alph_L_EN + alph_U_EN)
+                          alph_U_EN[enc_key:] + alph_U_EN[:enc_key], alph_L_EN + alph_U_EN)
     output = text.translate(table)
     return output
 
