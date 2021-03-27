@@ -1,8 +1,8 @@
 # Polyalphabetic rotating cipher with key in latin alphabet format
 
 def correct(enc_key):
-    for chr in enc_key.upper():
-        if not 64<ord(chr)<91:
+    for char in enc_key.upper():
+        if not 64 < ord(char) < 91:
             return False
     return True
 

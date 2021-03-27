@@ -1,6 +1,6 @@
 # counting frequency of characters or bi/trigrams in given text
-def frequencies(item, interval=1, case_sensitive=False, delimiter=" "):
-    if type(interval) is not int or interval not in range(5):
+def frequencies(item, interval=1, case_sensitive=False):
+    if type(interval) is not int or interval not in range(5) or type(case_sensitive) is not bool:
         return False
     if case_sensitive is False:
         item = item.upper()
@@ -14,17 +14,17 @@ def frequencies(item, interval=1, case_sensitive=False, delimiter=" "):
     else:
         for index in range(len(item)-interval):
             selected = item[index:index+interval]
-            if delimiter not in selected:
+            if selected.isalpha():
                 if selected in freq_dict.keys():
                     freq_dict[selected] += 1
                 else:
-                    freq_dict[selected] = 0
+                    freq_dict[selected] = 1
     return freq_dict
 
 
 # count frequencies of characters for polyalphabetic ciphers (eg viegnere), ommiting every non-alpahbetic character
-def poli_frequencies(item, interval, case_sensitive=False):
-    if type(interval) is not int or interval < 2:
+def poli_frequencies(item, interval=2, case_sensitive=False):
+    if type(interval) is not int or interval < 2 or type(case_sensitive) is not bool:
         return False
     freq_list = []
     if case_sensitive is False:
@@ -37,5 +37,59 @@ def poli_frequencies(item, interval, case_sensitive=False):
             if char in freq_list[counter % interval].keys():
                 freq_list[counter % interval][char] += 1
             else:
-                freq_list[counter % interval][char] = 0
+                freq_list[counter % interval][char] = 1
     return freq_list
+
+
+# counts frequencies of substrings given length on word beginnings or endings
+def words_edges_frequencies(item, length=3, beginning=True):
+    if type(length) is not int or length not in range(1, 4) or type(beginning) is not bool:
+        return False
+    item = item.upper()
+    freq_dict = {}
+    word = ''
+    for char in item:
+        if char.isalpha():
+            word += char
+        else:
+            if len(word) >= length:
+                if beginning is True:
+                    selected = word[:length]
+                else:
+                    selected = word[-length:]
+                if selected in freq_dict.keys():
+                    freq_dict[selected] += 1
+                else:
+                    freq_dict[selected] = 1
+            word = ""
+    return freq_dict
+
+
+# counts frequencies of words of givien lengths
+def short_words_frequencies(item, length=1, case_sensitive=False):
+    if type(length) is not int or length not in range(1, 4) or type(case_sensitive) is not bool:
+        return False
+    if case_sensitive is False:
+        item = item.upper
+    freq_dict = {}
+    word = ""
+    for char in item:
+        if char.isalpha():
+            word += char
+        else:
+            if len(word) == length:
+                if word in freq_dict.keys():
+                    freq_dict[word] += 1
+                else:
+                    freq_dict[word] = 1
+            word = ''
+    return freq_dict
+
+
+if __name__ == "__main__":
+    a = open("pt.txt", "r", encoding="utf8").read()
+    print(frequencies(a))
+    print(frequencies(a, interval=2))
+    print(poli_frequencies(a))
+    print(words_edges_frequencies(a, length=3))
+    print(short_words_frequencies(a, length=3))
