@@ -1,5 +1,5 @@
 # counting frequency of characters or bi/trigrams in given text
-def frequencies(item, interval=1, case_sensitive=False):
+def frequencies(item, interval=1, case_sensitive=False, delimiter=" "):
     if type(interval) is not int or interval not in range(5):
         return False
     if case_sensitive is False:
@@ -14,7 +14,7 @@ def frequencies(item, interval=1, case_sensitive=False):
     else:
         for index in range(len(item)-interval):
             selected = item[index:index+interval]
-            if " " not in selected:
+            if delimiter not in selected:
                 if selected in freq_dict.keys():
                     freq_dict[selected] += 1
                 else:
