@@ -1,6 +1,6 @@
 # cipher swapping letters in pairs, with builded-in key generator, forcing output to be same capitalization as input
 
-# key should be even, non-repeating string eg GADERYPOLUKI
+# key should be even, non-repeating iterable object eg GADERYPOLUKI
 def correct(enc_key):
     try:
         iter(enc_key)
