@@ -1,3 +1,5 @@
+# bunch of functions to examine text's properities connected with frequency, returning dictionary, or list of dicts
+
 # counting frequency of characters or bi/trigrams in given text
 def frequencies(item, interval=1, case_sensitive=False):
     if type(interval) is not int or interval not in range(5) or type(case_sensitive) is not bool:
@@ -67,10 +69,10 @@ def words_edges_frequencies(item, length=3, beginning=True):
 
 # counts frequencies of words of givien lengths
 def short_words_frequencies(item, length=1, case_sensitive=False):
-    if type(length) is not int or length not in range(1, 4) or type(case_sensitive) is not bool:
+    if type(length) is not int or length not in range(1, 5) or type(case_sensitive) is not bool:
         return False
     if case_sensitive is False:
-        item = item.upper
+        item = item.upper()
     freq_dict = {}
     word = ""
     for char in item:
@@ -92,4 +94,4 @@ if __name__ == "__main__":
     print(frequencies(a, interval=2))
     print(poli_frequencies(a))
     print(words_edges_frequencies(a, length=3))
-    print(short_words_frequencies(a, length=3))
+    print(short_words_frequencies(a, length=4))

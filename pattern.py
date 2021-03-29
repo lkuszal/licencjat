@@ -17,6 +17,9 @@ def decipher(text, enc_key=None):
         return False
 
 
+# dictionary containing frequent keys, or empty one
+library = {"name": "enc_key"}
+
 # testing
 if __name__ == "__main__":
     pass

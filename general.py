@@ -19,6 +19,10 @@ class Text:
         else:
             return self.plaintext
     
+    def __iter__(self):
+        # from collections.abc import Iterable, Iterator
+        return str.__iter__(str(self))
+
     # transforming language specific letters to latin alphabet
     def normalise(self):
         self.normalised_plaintext = unidecode(self.plaintext)

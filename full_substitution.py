@@ -1,40 +1,29 @@
-# substitution cipher, where every letter is replaced by another one, or other symbol with key generator
-# key should be full, converted alphabet same length as reference vector, not supporting differences between
-# capitalzations
-def correct(enc_key, reference):
-    try:
-        iter(enc_key)
-        if len(enc_key) == len(reference):
-            return True
-    except TypeError:
-        pass
-    return False
+# substitution cipher for key's symbols of different length than 1
 
 
-def cipher(text, enc_key, reference='ABCDEFGHIJKLMNOPQRTUVWXYZ'):
-    if correct(enc_key, reference) is False:
+# method ensuring that given key is in correct format
+def correct(enc_key):
+    pass
+
+
+# method for cipher
+def cipher(text, enc_key=None):
+    if not correct(enc_key):
         return False
-    tr_tab = key_generator(reference, enc_key)
-    return text.translate(tr_tab)
 
 
-def decipher(text, enc_key, reference='ABCDEFGHIJKLMNOPQRTUVWXYZ'):
-    if correct(enc_key, reference) is False:
+# method for decipher, for selfreversing cipher call cipher function
+def decipher(text, enc_key=None):
+    if not correct(enc_key):
         return False
-    tr_tab = key_generator(enc_key, reference)
-    return text.translate(tr_tab)
 
 
-# returns maketrans dictionary for full, non-self-reversible substitutions, as key you should pass full
-# converted alphabet (iterable) and refferencing, same-length full alphabet
-def key_generator(*args):
-    trans_dict = {}
-    for x, y in zip(args):
-        if x != y:
-            trans_dict[y.lower()] = x.lower()
-            trans_dict[y.upper()] = x.upper()
-    return str.maketrans(trans_dict)
+library = {"Morse code": ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--',
+                          '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..'],
+           "multitap": ['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
+                        '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999']}
 
 
+# testing
 if __name__ == "__main__":
     pass

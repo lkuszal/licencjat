@@ -43,7 +43,8 @@ def decipher(item, enc_key):
     return cipher(item, enc_key, encryption=True)
 
 
-def convert(bigram, table, e=1):
+# converts bigram, whether as encryption or decryption, based on value of e,
+def convert(bigram, table, e):
     a = table.index(bigram[0])
     b = table.index(bigram[1])
     a_x, a_y = a//5, a % 5
@@ -56,7 +57,7 @@ def convert(bigram, table, e=1):
         return table[a_x*5+b_y]+table[b_x*5+a_y]
 
 
-# returns nested list 5x5
+# returns list consisting full english alphabet in given order
 def key_generator(key):
     unique = []
     for x in key.upper().replace("J", "I"):
@@ -69,6 +70,9 @@ def key_generator(key):
     if len(unique) != 25:
         return False
     return unique
+
+
+library = {}
 
 
 if __name__ == "__main__":

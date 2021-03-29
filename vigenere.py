@@ -43,6 +43,9 @@ def decipher(text, enc_key):
     return output
 
 
+library = {}
+
+
 if __name__ == "__main__":
     print(cipher("Chron pulk twoj i szesc flag", "key"))
     print(decipher("Mlpyr nepi damt m qjiqm jjkk", "key"))

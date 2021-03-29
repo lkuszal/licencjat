@@ -1,42 +1,32 @@
-# simple monoalphabetic rotation cipher with natural number as key
-# TOO SLOW, SUCCEEDED BY CAESAR_TRANS
+# simple monoalphabetic rotation cipher with integer as key,
+# and optional reference alphabet (by default full latin)
+alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
+
+# key should be an integer, while
 def correct(enc_key):
-    if enc_key.isdigit():
+    if type(enc_key) is int:
         return True
     return False
 
 
-def cipher(text, enc_key):
+def cipher(text, enc_key, reference=alph_EN):
     if not correct(enc_key):
         return False
-    output = ""
-    enc_key = int(enc_key)
-    for ch in text:
-        if 64 < ord(ch) < 91:
-            output += chr((enc_key + ord(ch) - 65) % 26 + 65)
-        elif 96 < ord(ch) < 123:
-            output += chr((enc_key + ord(ch) - 97) % 26 + 97)
-        else:
-            output += ch
+    reference = reference.upper()
+    enc_key = int(enc_key) % len(reference)
+    table = str.maketrans(reference.lower() + reference, reference.lower()[enc_key:] +
+                          reference.lower()[:enc_key] + reference[enc_key:] + reference[:enc_key])
+    output = text.translate(table)
     return output
 
 
-def decipher(text, enc_key):
-    if not correct(enc_key):
-        return False
-    output = ""
-    enc_key = int(enc_key)
-    for ch in text:
-        if 64 < ord(ch) < 91:
-            output += chr((-enc_key + ord(ch) - 65) % 26 + 65)
-        elif 96 < ord(ch) < 123:
-            output += chr((-enc_key + ord(ch) - 97) % 26 + 97)
-        else:
-            output += ch
-    return output
-    
-    
+def decipher(text, enc_key, reference=alph_EN):
+    return cipher(text, -enc_key, reference)
+
+
+library = {"ROT13": 13}
+
 if __name__ == "__main__":
-    print(cipher("Chron pulk twoj i szesc flag", "13"))
-    print(decipher("Pueba chyx gjbw v fmrfp synt", "13"))
+    print(cipher("Chron pulk twoj i szesc flag", 11))
+    print(decipher("Nsczy afwv ehzu t dkpdn qwlr", 11))
