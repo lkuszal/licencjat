@@ -17,7 +17,8 @@ def decipher(text, enc_key=None):
         return False
 
 
-# dictionary containing frequent keys, or empty one
+# dictionary containing frequently used keys, or empty one, in case of passing additional argument to function,
+# whole value should be collected as a tuple
 library = {"name": "enc_key"}
 
 # testing

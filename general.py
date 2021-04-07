@@ -40,23 +40,20 @@ class Text:
 
 # tests
 if __name__ == "__main__":
+    '''
     asd = Text("Chroń pułk twój i sześć flag")
     print(asd)
     asd.normalise()
     print(asd)
     asd.suppress()
     print(asd)
-    '''
-    print(asd.normalised_plaintext)
-    print(asd.suppressed_plaintext)
-    print(asd.frequencies(asd.suppressed_plaintext))
-    a = open("pt.txt", "r", encoding="utf8").read()
     abc = Text(a)
     abc.normalise()
     abc.suppress()
-    print(abc.frequencies(abc.suppressed_plaintext))
+    '''
     # performance tests
-    import time, caesar, caesar_trans
+    a = open("pt.txt", "r", encoding="utf8").read()
+    import time, mono_substitution, caesar
     a = open("pt.txt", "r", encoding="utf8").read()
     b=Text(a)
     c=Text(a)
@@ -66,8 +63,6 @@ if __name__ == "__main__":
     caesar.cipher(str(a),"13")
     a2=time.perf_counter()
     b1=time.perf_counter()
-    caesar_trans.cipher(str(b),"13")
+    mono_substitution.cipher(str(b),"NOPQRTUVWXYZABCDEFGHIJKLM")
     b2=time.perf_counter()
     print(a2-a1,b2-b1)
-    ## ogromna różnica w wydajności, na korzyść metody maketrans
-    '''
