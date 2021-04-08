@@ -28,13 +28,12 @@ def decipher(text, enc_key, reference=alph_EN):
     return cipher(text, -enc_key, reference)
 
 
-library = {"ROT13": 13,
+library = {"ROT13": [13],
            "ROT47": (47, ('!"#$%&\'()*+,-./0123456789:;<=>?'
                           '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'))}
-print(library['ROT47'][1])
 
 if __name__ == "__main__":
     print(cipher("Chron pulk twoj i szesc flag", 11))
     print(decipher("Nsczy afwv ehzu t dkpdn qwlr", 11))
-    print(cipher("AChron pulk twoj i szesc flag", *library["ROT47"]))
-    print(cipher("puebachyxgjbwvfmrfpsyntv",13))
+    print(cipher("Chron pulk twoj i szesc flag", *library["ROT47"]))
+    print(cipher("puebachyxgjbwvfmrfpsyntv", *library["ROT13"]))

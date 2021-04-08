@@ -53,16 +53,21 @@ if __name__ == "__main__":
     '''
     # performance tests
     a = open("pt.txt", "r", encoding="utf8").read()
-    import time, mono_substitution, caesar
+    import time, mono_substitution, caesar, rev_substitution
     a = open("pt.txt", "r", encoding="utf8").read()
     b=Text(a)
     c=Text(a)
+    d=Text(a)
     b.normalise(), b.suppress()
     c.normalise(), b.suppress()
+    d.normalise(), d.suppress()
     a1=time.perf_counter()
-    caesar.cipher(str(a),"13")
+    caesar.cipher(str(b),"13")
     a2=time.perf_counter()
     b1=time.perf_counter()
-    mono_substitution.cipher(str(b),"NOPQRTUVWXYZABCDEFGHIJKLM")
+    mono_substitution.cipher(str(c),"NOPQRTUVWXYZABCDEFGHIJKLM")
     b2=time.perf_counter()
-    print(a2-a1,b2-b1)
+    c1=time.perf_counter()
+    rev_substitution.cipher(str(d), "ANBOCPDQERFSGTHUIVJWKXLYMZ")
+    c2=time.perf_counter()
+    print(a2-a1,b2-b1, c2-c1)

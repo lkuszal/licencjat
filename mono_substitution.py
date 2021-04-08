@@ -1,5 +1,7 @@
-# substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
-# not supporting differences between capitalzations
+# substitution cipher, where every letter is replaced by another one, or some symbol (but of length of one),
+# not supporting differences between ciphering capitalzations, but keeping cases
+alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
 
 # key should be full, converted alphabet same length as reference vector
 def correct(enc_key, reference):
@@ -12,14 +14,14 @@ def correct(enc_key, reference):
     return False
 
 
-def cipher(text, enc_key, reference='ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+def cipher(text, enc_key, reference=alph_EN):
     if correct(enc_key, reference) is False:
         return False
     tr_tab = key_generator(reference, enc_key)
     return text.translate(tr_tab)
 
 
-def decipher(text, enc_key, reference='ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
+def decipher(text, enc_key, reference=alph_EN):
     if correct(enc_key, reference) is False:
         return False
     tr_tab = key_generator(enc_key, reference)
@@ -30,7 +32,6 @@ def decipher(text, enc_key, reference='ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
 # converted alphabet (iterable) and refferencing, same-length full alphabet
 def key_generator(*args):
     trans_dict = {}
-    print(args)
     for x, y in zip(*args):
         if x != y:
             trans_dict[y.lower()] = x.lower()

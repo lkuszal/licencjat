@@ -31,7 +31,6 @@ def key_generator(key):
         trans_dict[key[x * 2].lower()] = key[x * 2 + 1].lower()
         trans_dict[key[x * 2 + 1].lower()] = key[x * 2].lower()
     result = str.maketrans(trans_dict)
-    print(type(result))
     return result
 
 
