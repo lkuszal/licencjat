@@ -8,11 +8,7 @@ def frequencies(item, interval=1, case_sensitive=False):
         item = item.upper()
     freq_dict = {}
     if interval == 1:
-        for char in item:
-            if char in freq_dict.keys():
-                freq_dict[char] += 1
-            else:
-                freq_dict[char] = 0
+        freq_dict = {key: item.count(key) for key in set(item)}
     else:
         for index in range(len(item)-interval):
             selected = item[index:index+interval]
@@ -91,7 +87,7 @@ def short_words_frequencies(item, length=1, case_sensitive=False):
 if __name__ == "__main__":
     a = open("pt.txt", "r", encoding="utf8").read()
     print(frequencies(a))
-    print(frequencies(a, interval=2))
+    '''print(frequencies(a, interval=2))
     print(poli_frequencies(a))
     print(words_edges_frequencies(a, length=3))
-    print(short_words_frequencies(a, length=4))
+    print(short_words_frequencies(a, length=4))'''

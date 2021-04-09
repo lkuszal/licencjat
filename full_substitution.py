@@ -1,7 +1,6 @@
 # substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
 # encryption key, reference as alphabet, boolean indicating if lower and upper cases should be converted to same
-alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
+from collection import alph_EN
 
 # method ensuring that given key is in correct format
 def correct(enc_key, reference):
@@ -69,16 +68,18 @@ def key_generator(*args):
     return trans_dict
 
 
+# every dict value should contain encryption key and other values if they are not default
 library = {"Morse code": [['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--',
                           '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..'],
                           alph_EN, True, "/", " "],
-           "multitap": ['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
-                        '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'],
-           "A1Z26": ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
-                     '18', '19', '20', '21', '22', '23', '24', '25', '26']}
+           "multitap": [['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
+                        '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'], alph_EN, True, ".", " "],
+           "A1Z26": [[str(x) for x in range(1, 27)], alph_EN, True, " ", "  "],
+           "A1Z23": [[str(x) for x in range(1, 24)], alph_EN]}
 
 
 # testing
 if __name__ == "__main__":
     print(cipher("Chron pulk twoj i szesc flag", *library["Morse code"]))
-    print(decipher("-.-./..../.-./---/-. .--./..-/.-../-.- -/.--/---/.--- .. .../--.././.../-.-. ..-./.-../.-/--.", *library["Morse code"]))
+    print(decipher("-.-./..../.-./---/-. .--./..-/.-../-.- -/.--/---/.--- .. .../--.././.../-.-. ..-./.-../.-/--.",
+                   *library["Morse code"]))

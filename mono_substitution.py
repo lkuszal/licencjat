@@ -1,6 +1,6 @@
 # substitution cipher, where every letter is replaced by another one, or some symbol (but of length of one),
 # not supporting differences between ciphering capitalzations, but keeping cases
-alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+from collection import alph_EN
 
 
 # key should be full, converted alphabet same length as reference vector
