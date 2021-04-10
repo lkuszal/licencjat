@@ -7,6 +7,7 @@ class Text:
     def __init__(self, text):
         assert type(text) is str
         self.plaintext = text
+        self.ciphertext = None
         self.normalised_plaintext = None
         self.suppressed_plaintext = None
 
@@ -33,7 +34,7 @@ class Text:
             temp_text = ""
             for char in self.normalised_plaintext.upper():
                 a = ord(char)
-                if 64 < a < 91 or 47 < a < 58:
+                if 64 < a < 91:
                     temp_text += char
             self.suppressed_plaintext = temp_text
 
