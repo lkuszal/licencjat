@@ -1,26 +1,19 @@
-# description of cipher
-
-# method ensuring that given key is in correct format
-def correct(enc_key):
-    pass
+from abc import ABCMeta
 
 
-# method for cipher
-def cipher(text, enc_key=None):
-    if not correct(enc_key):
-        return False
+# Describes every cipher class, by default all cipher modules should be based upon this abc class
+class MasterCipher(metaclass=ABCMeta):
 
+    # method of creation key-specific object for given cipher class, if cipher is keyless, return
+    # None as attribute key_object
+    def __init__(self, key, **kwargs):
+        return self.key_object
 
-# method for decipher, for selfreversing cipher call cipher function
-def decipher(text, enc_key=None):
-    if not correct(enc_key):
-        return False
+    # method for ciphering inputed text
+    def cipher(self, plain_text):
+        return self, ciphered_text
 
+    # method for deciphering
+    def decipher(self, ciphered_text):
+        return self, plain_text
 
-# dictionary containing frequently used keys, or empty one, in case of passing additional argument to function,
-# whole value should be collected as a tuple
-library = {"name": "enc_key"}
-
-# testing
-if __name__ == "__main__":
-    pass
