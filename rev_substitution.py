@@ -5,7 +5,7 @@ from pattern import MasterCipher
 
 class RevSubstitution(MasterCipher):
     def __init__(self, enc_key):
-        assert len(enc_key)%2 == 0
+        assert len(enc_key) % 2 == 0
         trans_dict = {}
         for x in range(len(enc_key)//2):
             trans_dict[enc_key[x * 2].upper()] = enc_key[x * 2 + 1].upper()
