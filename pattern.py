@@ -7,7 +7,7 @@ class MasterCipher(abc.ABC):
     # method of creation key-specific object for given cipher class, if cipher is keyless, return
     # None as attribute key_object
     @abc.abstractmethod
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.cipher_key = None
         self.decipher_key = None
 
