@@ -1,4 +1,5 @@
 from unidecode import unidecode
+from pattern import MasterCipher
 
 
 # class for keeping plaintext and perform basic operations before ciphering
@@ -39,6 +40,8 @@ class Text:
             self.suppressed_plaintext = temp_text
 
 
+
+
 # tests
 if __name__ == "__main__":
     '''
@@ -66,7 +69,7 @@ if __name__ == "__main__":
     caesar.cipher(str(b),"13")
     a2=time.perf_counter()
     b1=time.perf_counter()
-    mono_substitution.cipher(str(c),"NOPQRTUVWXYZABCDEFGHIJKLM")
+    # mono_substitution.cipher(str(c),"NOPQRTUVWXYZABCDEFGHIJKLM")
     b2=time.perf_counter()
     c1=time.perf_counter()
     rev_substitution.cipher(str(d), "ANBOCPDQERFSGTHUIVJWKXLYMZ")
