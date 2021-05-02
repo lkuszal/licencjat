@@ -8,15 +8,15 @@ class MasterCipher(abc.ABC):
     # None as attribute key_object
     @abc.abstractmethod
     def __init__(self):
-        self.__cipher_key = None
-        self.__decipher_key = None
+        self.cipher_key = None
+        self.decipher_key = None
 
-    # method for ciphering inputed text
+    # method for ciphering inputed text, by default using simple str method translate
     @abc.abstractmethod
     def cipher(self, plain_text):
-        return self, ciphered_text
+        return plain_text.translate(self.cipher_key)
 
     # method for deciphering
     @abc.abstractmethod
     def decipher(self, ciphered_text):
-        return self, plain_text
+        return ciphered_text.translate(self.decipher_key)

@@ -5,7 +5,6 @@ from pattern import MasterCipher
 
 
 class MonoSubstitution(MasterCipher):
-    @super
     def __init__(self, enc_key, reference=alph_EN):
         assert len(enc_key) == len(reference)
         cipher_dict, decipher_dict = {}, {}
@@ -19,10 +18,10 @@ class MonoSubstitution(MasterCipher):
         self.decipher_key = str.maketrans(decipher_dict)
 
     def cipher(self, plain_text):
-        return plain_text.translate(self.cipher_key)
+        return super().cipher(plain_text)
 
     def decipher(self, ciphered_text):
-        return ciphered_text.translate(self.decipher_key)
+        return super().decipher(ciphered_text)
 
 
 library = {}
