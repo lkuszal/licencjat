@@ -62,7 +62,7 @@ class PolySubstitution(MasterCipher):
                     else:
                         output += char
                 output += " "
-        return  output
+        return output
 
 
 def key_generator_karolinka(item):

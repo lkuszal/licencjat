@@ -1,31 +1,36 @@
 # simple monoalphabetic rotation cipher with integer as key, and optional reference alphabet (by default full upper
 # latin) if reference alphabet is full lower/upper, ciphering will convert them both to same letter, but will keep
 # capitalization
+from pattern import MasterCipher
+
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
-# key should be an integer, while
-def correct(enc_key):
-    if type(enc_key) is int:
-        return True
-    return False
+class Caesar(MasterCipher):
+    def __init__(self, enc_key, reference=alph_EN):
+        try:
+            enc_key = int(enc_key) % len(reference)
+        except ValueError:
+            assert enc_key.isnumeric()
+        if reference.islower() or reference.isupper():
+            ci_table = str.maketrans(reference.lower() + reference, reference.lower()[enc_key:] +
+                                     reference.lower()[:enc_key] + reference[enc_key:] + reference[:enc_key])
+            enc_key = -enc_key % len(reference)
+            de_table = str.maketrans(reference.lower() + reference, reference.lower()[enc_key:] +
+                                     reference.lower()[:enc_key] + reference[enc_key:] + reference[:enc_key])
+        else:
+            ci_table = str.maketrans(reference, reference[enc_key:] + reference[:enc_key])
+            enc_key = -enc_key % len(reference)
+            de_table = str.maketrans(reference, reference[enc_key:] + reference[:enc_key])
+        self.cipher_key = ci_table
+        self.decipher_key = de_table
+        self.reference = reference
 
+    def cipher(self, plain_text):
+        return super().cipher(plain_text)
 
-def cipher(text, enc_key, reference=alph_EN):
-    if not correct(enc_key):
-        return False
-    enc_key = int(enc_key) % len(reference)
-    if reference.islower() or reference.isupper():
-        table = str.maketrans(reference.lower() + reference, reference.lower()[enc_key:] +
-                              reference.lower()[:enc_key] + reference[enc_key:] + reference[:enc_key])
-    else:
-        table = str.maketrans(reference, reference[enc_key:]+reference[:enc_key])
-    output = text.translate(table)
-    return output
-
-
-def decipher(text, enc_key, reference=alph_EN):
-    return cipher(text, -enc_key, reference)
+    def decipher(self, ciphered_text):
+        return super().decipher(ciphered_text)
 
 
 library = {"ROT13": [13],
@@ -33,7 +38,11 @@ library = {"ROT13": [13],
                           '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'))}
 
 if __name__ == "__main__":
-    print(cipher("Chron pulk twoj i szesc flag", 11))
-    print(decipher("Nsczy afwv ehzu t dkpdn qwlr", 11))
-    print(cipher("Chron pulk twoj i szesc flag", *library["ROT47"]))
-    print(cipher("puebachyxgjbwvfmrfpsyntv", *library["ROT13"]))
+    asd = Caesar(*library["ROT13"])
+    sad = Caesar(*library["ROT47"])
+    print(asd.cipher("Chron pulk twoj i szesc flag"))
+    print(sad.cipher("Chron pulk twoj i szesc flag"))
+    print(asd.cipher("Pueba chyx gjbw v fmrfp synt"))
+    print(sad.cipher("r9C@? AF=< EH@; : DK6D4 7=28"))
+    print(asd.decipher("Pueba chyx gjbw v fmrfp synt"))
+    print(sad.decipher("r9C@? AF=< EH@; : DK6D4 7=28"))
