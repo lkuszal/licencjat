@@ -4,8 +4,7 @@ import abc
 # Describes every cipher class, by default all cipher modules should be based upon this abc class
 class MasterCipher(abc.ABC):
 
-    # method of creation key-specific object for given cipher class, if cipher is keyless, return
-    # None as attribute key_object
+    # method of creation key-specific object for given cipher class
     @abc.abstractmethod
     def __init__(self, *args, **kwargs):
         self.cipher_key = None
@@ -20,3 +19,6 @@ class MasterCipher(abc.ABC):
     @abc.abstractmethod
     def decipher(self, ciphered_text):
         return ciphered_text.translate(self.decipher_key)
+
+# except of class, all modules should contain library dictionary contating some of most popular keys (with already
+# specified options, or be empty

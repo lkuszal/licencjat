@@ -1,13 +1,17 @@
-# Polyalphabetic rotating cipher with key in latin alphabet format
 from pattern import MasterCipher
 
 
+# Polyalphabetic rotating cipher (caesar like) with key in latin alphabet format, where letters are denotating
+# rotation shift and position of ciphered letter correspond to some letter of key, as modulo of length of key
 class Vigenere(MasterCipher):
     def __init__(self, enc_key):
+        # simple checking and conversion of key to upper capitalization
         assert enc_key.isalpha()
         self.cipher_key = enc_key.upper()
         self.decipher_key = enc_key.upper()
 
+    # rotates iterated letter by shift value of corresponding key letter. value of letter and rotation is based on
+    # ord and chr functions, which allow to keep capitalization of letter
     def cipher(self, plain_text):
         output = ''
         n = 0
@@ -22,6 +26,8 @@ class Vigenere(MasterCipher):
                 output += ch
         return output
 
+    # deciphering is based on same method, with difference, that key value is substracted instead of added to
+    # letter value
     def decipher(self, ciphered_text):
         output = ""
         n = 0

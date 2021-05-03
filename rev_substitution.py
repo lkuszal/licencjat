@@ -1,19 +1,26 @@
-# cipher swapping letters in pairs, with builded-in key generator, forcing output to be same capitalization as input
-# key should be even, non-repeating iterable object eg GADERYPOLUKI
 from pattern import MasterCipher
 
 
+# cipher swapping letters in given pairs (so requiring to be even-length) as unique letter string
 class RevSubstitution(MasterCipher):
+    # creating string maketrans dicts to swap letters. Either converting both letters same way, keeping capitalization
+    # or treating them differently
     def __init__(self, enc_key):
         assert len(enc_key) % 2 == 0
         trans_dict = {}
-        for x in range(len(enc_key)//2):
-            trans_dict[enc_key[x * 2].upper()] = enc_key[x * 2 + 1].upper()
-            trans_dict[enc_key[x * 2 + 1].upper()] = enc_key[x * 2].upper()
-            trans_dict[enc_key[x * 2].lower()] = enc_key[x * 2 + 1].lower()
-            trans_dict[enc_key[x * 2 + 1].lower()] = enc_key[x * 2].lower()
+        if enc_key.isupper() or enc_key.islower():
+            for x in range(len(enc_key)//2):
+                trans_dict[enc_key[x * 2].upper()] = enc_key[x * 2 + 1].upper()
+                trans_dict[enc_key[x * 2 + 1].upper()] = enc_key[x * 2].upper()
+                trans_dict[enc_key[x * 2].lower()] = enc_key[x * 2 + 1].lower()
+                trans_dict[enc_key[x * 2 + 1].lower()] = enc_key[x * 2].lower()
+        else:
+            for x in range(len(enc_key)//2):
+                trans_dict[enc_key[x * 2]] = enc_key[x * 2 + 1]
+                trans_dict[enc_key[x * 2 + 1]] = enc_key[x * 2]
         self.cipher_key = self.decipher_key = str.maketrans(trans_dict)
 
+    # cipher and decipher methodes use both same method from abc MasterCipher, by simply using string .translate method
     def cipher(self, plain_text):
         return super().cipher(plain_text)
 

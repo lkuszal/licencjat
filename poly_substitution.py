@@ -1,16 +1,22 @@
-# substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
-# randomly choosed from few options), but every string has to be unique between letter's collections
 from random import choice
 from collection import alph_EN
 from pattern import MasterCipher
 
 
+# substitution cipher where every letter of text is replaced by some string (usually choosen by
+# random from few options in list), but every string has to be unique between letter's collections (repeated strings
+# will cause errors while deciphering).
+# Cipher can use either special delimeter separating all ciphered letters xor all ciphered letters
+# can be of the same, constant length and not use any delimeter (if you want to use cipher of same length and with
+# delimeter, simply pass is without changing const_len).
 class PolySubstitution(MasterCipher):
-    def __init__(self, enc_key, reference=alph_EN, delimeter=None, const_len=None):
+    # init methods creates encryption and decryption dictrionaries. Encryption consist all reference letters and
+    # corresponding lists of possible words, while decryption consist every encrypted word and corresponding letters
+    def __init__(self, enc_key, reference=alph_EN, delimeter="", const_len=None):
         assert len(enc_key) == len(reference)
         unnested_key = [x for y in enc_key for x in y]
         assert len(unnested_key) == len(set(unnested_key))
-        assert (delimeter is None) != (const_len is None)
+        assert (delimeter is "") != (const_len is None)
         assert set([type(x) for x in enc_key]) == {list}
         if const_len is not None:
             assert const_len.isnumeric()
@@ -24,30 +30,28 @@ class PolySubstitution(MasterCipher):
                 trans_dict_de[z] = x
         self.cipher_key = trans_dict_en
         self.decipher_key = trans_dict_de
-        self.reference = reference
         self.delimeter = delimeter
         self.const_len = const_len
 
+    # cipher will simply convert every character in encryption dictionary to random element from list in dictionary
+    # ending with delimeter or pass space to split words, also adding spaces between words
     def cipher(self, plain_text):
         output = ''
-        if self.delimeter is None:
-            for char in plain_text:
-                if char in self.cipher_key.keys():
-                    output += choice(self.cipher_key[char])
-                elif char == " ":
-                    output += char
-        else:
-            for char in plain_text:
-                if char in self.cipher_key.keys():
-                    output += choice(self.cipher_key[char])
-                else:
-                    output += char
+        for char in plain_text:
+            if char in self.cipher_key.keys():
+                output += choice(self.cipher_key[char])
                 output += self.delimeter
+            elif char == " ":
+                output += char
         return output
 
+    # depending on type of cipher options (constant length or delimeter) will perform different actions. For first it
+    # will split whole text by whitespaces. If given is length, it will divide words from iteration on length based
+    # substrings and try to decipher it from decipher dictionary. If given is delimeter, it will perform another split
+    # and convert given parts to plaint text
     def decipher(self, ciphered_text):
         output = ''
-        if self.delimeter is None:
+        if self.delimeter is "":
             for word in ciphered_text.split():
                 for x in range(len(word)//self.const_len):
                     piece = word[self.const_len*x:self.const_len*x+self.const_len]
@@ -64,7 +68,7 @@ class PolySubstitution(MasterCipher):
                 output += " "
         return output
 
-
+# additional function, creating input encryption key for given word, like karolinka cipher
 def key_generator_karolinka(item):
     table = [[] for x in range(len(alph_EN))]
     for x in range(len(item)):

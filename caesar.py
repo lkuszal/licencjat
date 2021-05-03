@@ -6,7 +6,11 @@ from pattern import MasterCipher
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
+# simple cipher working by rotating whole alphabet by given shift value. Due to not using letter-specific method, any
+# rot cipher with different alpabet can be used e.g. rot47
 class Caesar(MasterCipher):
+    # instead of simply shifting every letter of iterated text, we use maketrans methods due to much higher efficiency
+    # this method simply creates maketrans dicts by rotating given reference alphabet
     def __init__(self, enc_key, reference=alph_EN):
         try:
             enc_key = int(enc_key) % len(reference)
@@ -26,6 +30,7 @@ class Caesar(MasterCipher):
         self.decipher_key = de_table
         self.reference = reference
 
+    # cipher and decipher methodes use both same method from abc MasterCipher, by simply using string .translate method
     def cipher(self, plain_text):
         return super().cipher(plain_text)
 
@@ -33,9 +38,9 @@ class Caesar(MasterCipher):
         return super().decipher(ciphered_text)
 
 
-library = {"ROT13": [13],
-           "ROT47": (47, ('!"#$%&\'()*+,-./0123456789:;<=>?'
-                          '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'))}
+library = {"ROT13": ['13'],
+           "ROT47": ('47', ('!"#$%&\'()*+,-./0123456789:;<=>?'
+                            '@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'))}
 
 if __name__ == "__main__":
     asd = Caesar(*library["ROT13"])
