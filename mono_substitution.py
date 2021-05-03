@@ -34,7 +34,7 @@ class MonoSubstitution(MasterCipher):
         return super().decipher(ciphered_text)
 
 
-library = {}
+library = {"ROT13": ["NOPQRSTUVWXYZABCDEFGHIJKLM"]}
 
 
 if __name__ == "__main__":

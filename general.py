@@ -6,7 +6,7 @@ class Text:
     # initializing object by passing string
     def __init__(self, text):
         assert type(text) is str
-        self.plaintext = text
+        self.plaintext = str(text)
         self.is_supressed = False
         self.is_normalised = True
 
@@ -17,6 +17,9 @@ class Text:
     def __iter__(self):
         # from collections.abc import Iterable, Iterator
         return str.__iter__(str(self))
+
+    def upper(self):
+        return str.upper(self.plaintext)
 
     # transforming language specific letters to latin alphabet
     def normalise(self):
