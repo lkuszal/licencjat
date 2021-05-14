@@ -2,8 +2,9 @@
 
 # counting frequency of characters or bi/trigrams in given text
 def frequencies(item, interval=1, case_sensitive=False):
-    if type(interval) is not int or interval not in range(5) or type(case_sensitive) is not bool:
-        return False
+    assert type(interval) is int
+    assert type(case_sensitive) is bool
+    assert interval < 4
     if case_sensitive is False:
         item = item.upper()
     freq_dict = {}
@@ -22,8 +23,9 @@ def frequencies(item, interval=1, case_sensitive=False):
 
 # count frequencies of characters for polyalphabetic ciphers (eg viegnere), ommiting every non-alpahbetic character
 def poli_frequencies(item, interval=2, case_sensitive=False):
-    if type(interval) is not int or interval < 2 or type(case_sensitive) is not bool:
-        return False
+    assert type(interval) is int
+    assert type(case_sensitive) is bool
+    assert interval >= 2
     freq_list = []
     if case_sensitive is False:
         item = item.upper()
@@ -36,13 +38,16 @@ def poli_frequencies(item, interval=2, case_sensitive=False):
                 freq_list[counter % interval][char] += 1
             else:
                 freq_list[counter % interval][char] = 1
+            counter += 1
     return freq_list
 
 
 # counts frequencies of substrings given length on word beginnings or endings
 def words_edges_frequencies(item, length=3, beginning=True):
-    if type(length) is not int or length not in range(1, 4) or type(beginning) is not bool:
-        return False
+    assert type(length) is int
+    assert length < 5
+    assert type(beginning) is bool
+    assert not str(item).isalpha()
     item = item.upper()
     freq_dict = {}
     word = ''
@@ -65,8 +70,9 @@ def words_edges_frequencies(item, length=3, beginning=True):
 
 # counts frequencies of words of givien lengths
 def short_words_frequencies(item, length=1, case_sensitive=False):
-    if type(length) is not int or length not in range(1, 5) or type(case_sensitive) is not bool:
-        return False
+    assert type(length) is int
+    assert length < 5
+    assert type(case_sensitive) is bool
     if case_sensitive is False:
         item = item.upper()
     freq_dict = {}
@@ -101,8 +107,9 @@ if __name__ == "__main__":
     a = Text(open("pt.txt", "r", encoding="utf8").read())
     a.normalise()
     a.suppress()
-    c=ms.MonoSubstitution(*ms.library["ROT13"])
-    a_1=c.cipher(str(a))
+    '''
+    c = ms.MonoSubstitution(*ms.library["ROT13"])
+    a_1 = c.cipher(str(a))
     b = frequencies(a)
     b1 = frequencies(a_1)
     new_freq_a = {}
@@ -117,7 +124,7 @@ if __name__ == "__main__":
     print(new_freq_a1)
     print(kappa_count(new_freq_a))
     print(kappa_count(new_freq_a1))
-    '''print(frequencies(a, interval=2))
-    print(poli_frequencies(a))
+    print(frequencies(a, interval=2))
+    print(poli_frequencies(a))'''
     print(words_edges_frequencies(a, length=3))
-    print(short_words_frequencies(a, length=4))'''
+    print(short_words_frequencies(a, length=4))
