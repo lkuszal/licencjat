@@ -1,4 +1,6 @@
 # bunch of functions to examine text's properities connected with frequency, returning dictionary, or list of dicts
+from collection import alph_EN
+
 
 # counting frequency of characters or bi/trigrams in given text
 def frequencies(item, interval=1, case_sensitive=False):
@@ -99,6 +101,7 @@ def kappa_count(freq_dict):
     for x in kappa_list:
         kappa += x*(x-1)/denominator
     return kappa
+
 
 
 if __name__ == "__main__":
