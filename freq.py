@@ -1,6 +1,4 @@
 # bunch of functions to examine text's properities connected with frequency, returning dictionary, or list of dicts
-from collection import alph_EN
-
 
 # counting frequency of characters or bi/trigrams in given text
 def frequencies(item, interval=1, case_sensitive=False):
@@ -103,31 +101,5 @@ def kappa_count(freq_dict):
     return kappa
 
 
-
 if __name__ == "__main__":
-    from general import Text
-    import mono_substitution as ms
-    a = Text(open("pt.txt", "r", encoding="utf8").read())
-    a.normalise()
-    a.suppress()
-    '''
-    c = ms.MonoSubstitution(*ms.library["ROT13"])
-    a_1 = c.cipher(str(a))
-    b = frequencies(a)
-    b1 = frequencies(a_1)
-    new_freq_a = {}
-    for x in b.keys():
-        if x.isalpha():
-            new_freq_a[x] = b[x]
-    new_freq_a1 = {}
-    for x in b1.keys():
-        if x.isalpha():
-            new_freq_a1[x] = b1[x]
-    print(new_freq_a)
-    print(new_freq_a1)
-    print(kappa_count(new_freq_a))
-    print(kappa_count(new_freq_a1))
-    print(frequencies(a, interval=2))
-    print(poli_frequencies(a))'''
-    print(words_edges_frequencies(a, length=3))
-    print(short_words_frequencies(a, length=4))
+    pass

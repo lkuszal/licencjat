@@ -1,6 +1,6 @@
 from unidecode import unidecode
 
-
+'''
 # class for keeping plaintext and perform basic operations before ciphering
 class Text:
     # initializing object by passing string
@@ -36,13 +36,27 @@ class Text:
                     temp_text += char
             self.plaintext = temp_text
         self.is_supressed = True
+'''
+
+
+def normalise(text):
+    return unidecode(text)
+
+
+def suppress(text):
+    temp_text = ""
+    for char in text.upper():
+        a = ord(char)
+        if 64 < a < 91:
+            temp_text += char
+    return temp_text
 
 
 # tests
 if __name__ == "__main__":
-    asd = Text("Chroń pułk twój i sześć flag")
+    '''asd = Text("Chroń pułk twój i sześć flag")
     print(asd)
     asd.normalise()
     print(asd)
     asd.suppress()
-    print(asd)
+    print(asd)'''
