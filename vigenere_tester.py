@@ -1,10 +1,12 @@
 from linecache import getline
 from random import randrange
-from general import normalise, suppress
+
+from collection import normalise, suppress
 from vigenere import Vigenere
 from collection import word_generator
 
 
+# returns random fragment of given lenght from file,
 def random_text(length, file="tools/output_lines.txt", file_length=39568):
     a = randrange(file_length-length//10)
     text = ''
@@ -14,6 +16,7 @@ def random_text(length, file="tools/output_lines.txt", file_length=39568):
     return text[:length]
 
 
+# returns text ciphered by random key of given length and this key
 def vigenere_generator(length, key_length):
     key = word_generator(key_length)
     asd = suppress(normalise(random_text(length)))
