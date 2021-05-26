@@ -4,8 +4,9 @@ from collection import alph_EN
 from pattern import MasterCipher
 
 
-# mono substitution aims to replace all selected letters or marks by any other letter or symbol, but length of one
 class MonoSubstitution(MasterCipher):
+    """mono substitution aims to replace all selected letters or marks by any other letter or symbol, but length
+    of one"""
     # init method creates maketrans dicts containing all replacments, if reference contains only one capitalization
     # of letters cipher will convert both lower and upper letters and keep their capitalization. Reference (english
     # upper alphabet by default) and ciphered alphabet needs to be same of the same length

@@ -1,9 +1,9 @@
+"""substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
+encryption key, referencing alphabet, and delimeter seperating letters, and space seperating words"""
 from collection import alph_EN
 from pattern import MasterCipher
 
 
-# substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
-# encryption key, referencing alphabet, and delimeter seperating letters, and space seperating words
 class FullSubstitution(MasterCipher):
     # creating encryption and decryption dictionaries from encryption keys and reference (same length)
     def __init__(self, enc_key, reference=alph_EN, delimiter="", space=" "):

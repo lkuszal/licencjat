@@ -1,16 +1,16 @@
-# simple monoalphabetic rotation cipher with integer as key, and optional reference alphabet (by default full upper
-# latin) if reference alphabet is full lower/upper, ciphering will convert them both to same letter, but will keep
-# capitalization
+"""simple monoalphabetic rotation cipher with integer as key, and optional reference alphabet (by default full
+upperlatin) if reference alphabet is full lower/upper, ciphering will convert them both to same letter, but will
+keep capitalization"""
 from pattern import MasterCipher
 
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
-# simple cipher working by rotating whole alphabet by given shift value. Due to not using letter-specific method, any
-# rot cipher with different alpabet can be used e.g. rot47
 class Caesar(MasterCipher):
-    # instead of simply shifting every letter of iterated text, we use maketrans methods due to much higher efficiency
-    # this method simply creates maketrans dicts by rotating given reference alphabet
+    """simple cipher working by rotating whole alphabet by given shift value. Due to not using letter-specific method,
+    any rot cipher with different alpabet can be used e.g. rot47
+    instead of simply shifting every letter of iterated text, we use maketrans methods due to much higher efficiency
+    this method simply creates maketrans dicts by rotating given reference alphabet"""
     def __init__(self, enc_key, reference=alph_EN):
         try:
             enc_key = int(enc_key) % len(reference)

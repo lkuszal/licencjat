@@ -1,29 +1,19 @@
-from linecache import getline
-from random import randrange
-
-from collection import normalise, suppress
 from vigenere import Vigenere
-from collection import word_generator
+from collection import word_generator, normalise, suppress, random_text
 
 
-# returns random fragment of given lenght from file,
-def random_text(length, file="tools/output_lines.txt", file_length=39568):
-    a = randrange(file_length-length//10)
-    text = ''
-    while len(text) < length:
-        text += getline(file, a)
-        a += 1
-    return text[:length]
-
-
-# returns text ciphered by random key of given length and this key
-def vigenere_generator(length, key_length):
+def vigenere_generator(length, key_length, supresssion=False):
+    """returns text of given length (ciphered by random key of given length) and this key"""
     key = word_generator(key_length)
-    asd = suppress(normalise(random_text(length)))
-    lalka = Vigenere(key)
-    return lalka.cipher(asd), key
+    text = normalise(random_text(length))
+    if supresssion:
+        text = suppress(text)
+    asd = Vigenere(key)
+    return asd.cipher(text), key
 
 
 if __name__ == "__main__":
+    print(random_text(151))
     print(vigenere_generator(151, 4))
-    print(len(random_text(151)))
+
+
