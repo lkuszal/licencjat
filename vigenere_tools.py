@@ -47,26 +47,12 @@ def square_kappa_difference(kappa_list, kappa=0.05924):
         kappa_list[x] = (y-kappa)**2
     return kappa_list
 
- ###
-def indexing_kappa(kappa_list):
-    result = []
-    while set(kappa_list) != {1}:
-        min_val = kappa_list[0]
-        min_index = 0
-        for x, y in enumerate(kappa_list):
-            if y < min_val:
-                min_val = y
-                min_index = x
-        result.append(min_index+2)
-        kappa_list[min_index] = 1
-    return result
-
 
 def caesar_solver(freq_list, reference=PL_freq):
     """performs chi square test between two arrays, then cycle first one as long as checks all possibilites"""
     solutions = []
     for x in range(len(freq_list)):
-        solutions.append([chi_square(freq_list, reference), x])
+        solutions.append([chi_square(freq_list, reference), alph_EN[x]])
         freq_list = cycle_list(freq_list)
     return sorted(solutions)[:3]
 
@@ -79,13 +65,17 @@ def length_by_kappa_solver(text, limit=10):
         for y in freq.poli_frequencies(text, x):
             temp.append(freq.kappa_count(y))
         kappa_for_dif_len.append(mean(temp))
-    return indexing_kappa(square_kappa_difference(kappa_for_dif_len))
-    
+    kappa = 0.05924
+    kappa_list = []
+    for x, y in enumerate(kappa_for_dif_len):
+        kappa_list.append([(y-kappa)**2, x+2])
+    return [x[1] for x in sorted(kappa_list) if x[0] < 0.0001]
+
 
 if __name__ == "__main__":
     pass
-    random_cryptotext = vigenere_generator(1222, 7)
-    # print(length_by_kappa_solver(random_cryptotext[0]))
+    random_cryptotext = vigenere_generator(200, 4)
+    print(length_by_kappa_solver(random_cryptotext[0]))
     print(random_cryptotext[1])
     results = []
     for x in poli_lists(freq.poli_frequencies(random_cryptotext[0], 7)):
