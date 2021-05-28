@@ -4,11 +4,6 @@ from collection import PL_freq, alph_EN
 from vigenere_tester import vigenere_generator
 
 
-# should connect whole module into one function, resulting of single result as cracked key and deciphered text
-def cracker(text, language_freq=PL_freq):
-    pass
-
-
 def chi_square(observed, expected):
     """counts pearson chi square test between two list of counted occurances"""
     assert len(observed) == len(expected)
@@ -71,9 +66,9 @@ def caesar_solver(freq_list, reference=PL_freq):
     """performs chi square test between two arrays, then cycle first one as long as checks all possibilites"""
     solutions = []
     for x in range(len(freq_list)):
-        solutions.append(chi_square(freq_list, reference))
+        solutions.append([chi_square(freq_list, reference), x])
         freq_list = cycle_list(freq_list)
-    return solutions.index(min(solutions))
+    return sorted(solutions)[:3]
 
 
 def length_by_kappa_solver(text, limit=10):
@@ -95,7 +90,4 @@ if __name__ == "__main__":
     results = []
     for x in poli_lists(freq.poli_frequencies(random_cryptotext[0], 7)):
         results.append(caesar_solver(x))
-    a = ''
-    for x in results:
-        a += alph_EN[x]
-    print(a)
+    print(results)

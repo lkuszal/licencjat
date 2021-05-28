@@ -1,4 +1,4 @@
-# bunch of frequently used objects to import into another modules
+"""bunch of frequently used objects to import into another modules"""
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 PL_freq = [0.10011, 0.015, 0.04437, 0.03292, 0.09095, 0.00293, 0.01365, 0.0107, 0.08368, 0.02367, 0.03399, 0.03984,
@@ -63,8 +63,8 @@ def suppress(text):
 
 from linecache import getline
 from random import randrange
-# returns random fragment of given lenght from file
 def random_text(length, file="output_lines.txt", file_length=39568):
+    """returns random fragment of given lenght from file"""
     a = randrange(file_length - length // 10)
     text = ''
     while len(text) < length:

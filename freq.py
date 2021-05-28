@@ -94,16 +94,16 @@ def short_words_frequencies(item, length=1, case_sensitive=False):
 
 def kappa_count(freq_dict):
     """calculate kappa value (index of coincidence) of letter frequncies passed as dictionaries"""
-    kappa_list = [freq_dict[x] for x in freq_dict.keys()] ###
-    list_sum = sum(kappa_list)
+    list_sum = sum(freq_dict.values())
     denominator = list_sum*(list_sum-1)
+    assert denominator != 0  # too short text
     kappa = 0
-    for x in kappa_list:
+    for x in freq_dict.values():
         kappa += x*(x-1)/denominator
     return kappa
 
 
 if __name__ == "__main__":
     pass
-    print(kappa_count({x: 2 for x in range(1, 10)}))
-    print(kappa_count({x: 2 for x in range(1, 10)}))
+    print(kappa_count({x: 2 for x in range(10)}))
+    print(kappa_count({x: 3 for x in range(10)}))
