@@ -48,13 +48,13 @@ def square_kappa_difference(kappa_list, kappa=0.05924):
     return kappa_list
 
 
-def caesar_solver(freq_list, reference=PL_freq):
+def caesar_solver(freq_list, options=2, reference=PL_freq):
     """performs chi square test between two arrays, then cycle first one as long as checks all possibilites"""
     solutions = []
     for x in range(len(freq_list)):
         solutions.append([chi_square(freq_list, reference), alph_EN[x]])
         freq_list = cycle_list(freq_list)
-    return sorted(solutions)[:3]
+    return sorted(solutions)[:options]
 
 
 def length_by_kappa_solver(text, limit=10):
@@ -70,8 +70,27 @@ def length_by_kappa_solver(text, limit=10):
     for x, y in enumerate(kappa_for_dif_len):
         kappa_list.append([(y-kappa)**2, x+2])
     return [x[1] for x in sorted(kappa_list) if x[0] < 0.0001]
+        
 
-
+def chis_scrap(chis, options=3):
+    results = []
+    key = ''
+    rate = []
+    rate2 = []
+    for x in range(len(chis)):
+        key += chis[x][0][1]
+        rate.append(chis[x][0][0])
+        rate2.append(chis[x][1][0])
+    results.append([mean(rate), key])
+    diffs = []
+    for n, x in enumerate(zip(rate, rate2)):
+        
+        diffs.append([abs(x[0]-x[1]), n])
+    for x in sorted(diffs)[:options]:
+        results.append([mean(rate[:x[1]]+[chis[x[1]][1][0]]+rate[x[1]+1:]), key[:x[1]]+chis[x[1]][1][1]+key[x[1]+1:]])
+    return results
+    
+    
 if __name__ == "__main__":
     pass
     random_cryptotext = vigenere_generator(200, 4)
