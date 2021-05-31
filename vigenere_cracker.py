@@ -46,23 +46,22 @@ def confidence_2(length):
             good_stats[n].append(y)
     for x in good_stats:
         x.sort()
-    print(good_stats[0])
     bad_stats = [[] for x in range(12)]
     for x in bad:
         for n, y in enumerate(x):
             bad_stats[n].append(y)
     for x in bad_stats:
         x.sort()
-    for x in range(1): ###
-        for y in [0.95, 0.955, 0.96, 0.965, 0.97, 0.975, 0.98, 0.985, 0.99, 0.995]:
+    for x in range(len(good_stats)): ###
+        for y in [0.95, 0.955, 0.96, 0.965, 0.97, 0.975, 0.98, 0.985, 0.99, 0.995, 1]:
             a = good_stats[x][int(y*len(good_stats[x])//1)-1]
             b = 0
-            for z in bad_stats[x]:
-                if z > a:
+            for z in bad_stats[x][::-1]:
+                if z < a:
                     break
                 b += 1
-            print(y, a, b/len(bad_stats[x]))
-            
+            print(y, a, (len(bad_stats[x])-b)/len(bad_stats[x]))
+
             
 if __name__ == "__main__":
-    confidence_2(500)
+    confidence_2(1000)

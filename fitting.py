@@ -39,7 +39,7 @@ def rating(obs, exp):
 
 
 def lang_checker(rating_grades):
-    for x, y in zip(rating_grades, collection.thresholds_full):
+    for x, y in zip(rating_grades, collection.thresholds_full[100]):
         if x > y:
             return 0
     return 1
