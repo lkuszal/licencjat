@@ -1,6 +1,6 @@
 from statistics import mean
 import freq
-from collection import PL_freq, alph_EN
+from collection import letter_freq, alph_EN
 from vigenere_tester import vigenere_generator
 
 
@@ -48,7 +48,7 @@ def square_kappa_difference(kappa_list, kappa=0.05924):
     return kappa_list
 
 
-def caesar_solver(freq_list, options=2, reference=PL_freq):
+def caesar_solver(freq_list, options=2, reference=letter_freq):
     """performs chi square test between two arrays, then cycle first one as long as checks all possibilites"""
     solutions = []
     for x in range(len(freq_list)):

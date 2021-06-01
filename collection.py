@@ -1,19 +1,7 @@
 """bunch of frequently used objects to import into another modules"""
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-PL_freq = [0.10011, 0.015, 0.04437, 0.03292, 0.09095, 0.00293, 0.01365, 0.0107, 0.08368, 0.02367, 0.03399, 0.03984,
-           0.02963, 0.05671, 0.08448, 0.03078, 2e-05, 0.04497, 0.04946, 0.03937, 0.02296, 0.00027, 0.04507, 0.00018,
-           0.03836, 0.06591]
 
-thresholds_full = {
-    100: [0.019275, 1, 1, 0.057512, 1, 1, 0.062059, 1, 1, 1, 1, 1],
-    200: [0.015148, 0.010128, 1, 1, 1, 1, 0.0483, 1, 1, 1, 1, 1],
-    300: [0.012547299, 0.008375887, 1, 1, 1, 1, 0.040191347, 1, 1, 1, 1, 1],
-    400: [0.011086907, 0.00771328, 1, 1, 1, 1, 0.037040258, 1, 1, 1, 1, 1],
-    500: [0.01052275, 0.006553827, 0.006703591, 1, 1, 1, 0.032004293, 1, 1, 1, 1, 1],
-    750: [0.008719527, 0.005699251, 0.005661236, 1, 0.017699873, 1, 0.028294449, 0.016149334, 1, 1, 1, 1],
-    1000: [0.007881, 0.005162, 0.004893, 0.026804, 0.016597, 1, 0.025271403, 0.014771, 0.019404258, 0.120518112, 1, 1]
-}
 thresholds_suppressed = {
     100: [0.023711712548595852, 0.015380634944193061, 0.02003437686868687],
     200: [0.017788349431934733, 0.011377657060312733, 0.014325110289855073],
@@ -25,17 +13,19 @@ thresholds_suppressed = {
 }
 
 
-from pickle import load
-model = load(open("pl_model.p", "rb"))
+from json import load
+model = load(open("freq_model", "r"))
+thresholds_full = load(open("threshold_full.json", "r"))
+letter_freq = load(open("letter_freq.json", "r"))
 
 
-from random import choices
 def word_generator(length):
+    from random import choices
     return "".join(choices(alph_EN, k=length))
 
 
-from unidecode import unidecode
 def normalise(text):
+    from unidecode import unidecode
     return unidecode(text)
 
 
@@ -48,10 +38,10 @@ def suppress(text):
     return temp_text
 
 
-from linecache import getline
-from random import randrange
 def random_text(length, file="output_lines.txt", file_length=39568):
     """returns random fragment of given lenght from file"""
+    from linecache import getline
+    from random import randrange
     a = randrange(file_length - length // 10)
     text = ''
     while len(text) < length:

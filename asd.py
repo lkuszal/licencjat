@@ -30,7 +30,7 @@ for x in asd.readlines():
 print(aaa)
 from collection import normalise
 normalise("ĄŚŻŹ")
-'''
+
 
 from vigenere_tester import random_text
 from fitting import fitter
@@ -40,3 +40,12 @@ print(fitter(asd))
 a = Caesar(20)
 print(fitter(a.cipher(asd)))
 
+
+import json
+a = {"A":2, "B":4, "C": 8}
+json.dump(a, open("asd.json", "w"))
+
+
+a = json.load(open("asd.json", "r"))
+print(a["A"])
+'''

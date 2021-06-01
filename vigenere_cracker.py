@@ -32,4 +32,4 @@ def vigenere_solver(text):
         
         
 if __name__ == "__main__":
-    print(vigenere_solver(vigenere_generator(1000, 3)[0]))
+    print(vigenere_solver(vigenere_generator(1000, 2)[0]))

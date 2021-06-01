@@ -50,7 +50,7 @@ def lang_checker(text):
             if x > y:
                 diff += x/y
     else:
-        n = min([[abs(250 - a), a] for a in collection.thresholds_full.keys()])[1]
+        n = min([[abs(250 - int(a)), int(a)] for a in collection.thresholds_full.keys()])[1]
         for x, y in zip(scores, collection.thresholds_full[n]):
             if x > y:
                 diff += x/y
