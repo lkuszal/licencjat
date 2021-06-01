@@ -84,7 +84,6 @@ def chis_scrap(chis, options=3):
     results.append([mean(rate), key])
     diffs = []
     for n, x in enumerate(zip(rate, rate2)):
-        
         diffs.append([abs(x[0]-x[1]), n])
     for x in sorted(diffs)[:options]:
         results.append([mean(rate[:x[1]]+[chis[x[1]][1][0]]+rate[x[1]+1:]), key[:x[1]]+chis[x[1]][1][1]+key[x[1]+1:]])
