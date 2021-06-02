@@ -1,7 +1,7 @@
 """functions connected with checking goodness of fit of text to model values"""
 import freq
 import collection
-model = collection.model
+model = collection.freq_model
 
 
 def fitter(text, max_length=3):
@@ -52,6 +52,7 @@ def lang_checker(text):
     else:
         n = min([[abs(250 - int(a)), int(a)] for a in collection.thresholds_full.keys()])[1]
         for x, y in zip(scores, collection.thresholds_full[n]):
+            print(x,y)
             if x > y:
                 diff += x/y
     return diff

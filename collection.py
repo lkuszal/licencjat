@@ -13,8 +13,8 @@ thresholds_suppressed = {
 }
 
 
-from json import load
-model = load(open("freq_model", "r"))
+from json import load ###
+freq_model = load(open("freq_model.json", "r"))
 thresholds_full = load(open("threshold_full.json", "r"))
 letter_freq = load(open("letter_freq.json", "r"))
 
