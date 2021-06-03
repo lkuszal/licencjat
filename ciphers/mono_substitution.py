@@ -1,7 +1,7 @@
 # substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
 # not supporting differences between ciphering capitalzations, but keeping cases
 from collection import alph_EN
-from pattern import MasterCipher
+from ciphers.pattern import MasterCipher
 
 
 class MonoSubstitution(MasterCipher):

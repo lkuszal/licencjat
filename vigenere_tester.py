@@ -1,4 +1,4 @@
-from vigenere import Vigenere
+from ciphers.vigenere import Vigenere
 from collection import word_generator, normalise, suppress, random_text
 
 
@@ -13,7 +13,6 @@ def vigenere_generator(length, key_length, supresssion=False):
 
 
 if __name__ == "__main__":
-    print(random_text(151))
     print(vigenere_generator(151, 4))
 
 

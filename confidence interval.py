@@ -2,7 +2,7 @@ from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, ch
 from vigenere_tester import vigenere_generator
 from freq import poli_frequencies
 from fitting import fitter
-from vigenere import Vigenere
+from ciphers.vigenere import Vigenere
 
 
 def fitter_cracker(lenght, key_length, sample):

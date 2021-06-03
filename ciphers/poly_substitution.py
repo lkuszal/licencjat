@@ -1,7 +1,7 @@
 # substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
 # randomly choosed from few options), but every string has to be unique between letter's collections
 from random import choice
-from collection import alph_EN
+from ciphpy.collection import alph_EN
 
 
 # key should be double nested list consisting all unique strings, length of reference alphabet, delimeter

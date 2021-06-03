@@ -1,4 +1,4 @@
-from pattern import MasterCipher
+from ciphers.pattern import MasterCipher
 
 
 # cipher swapping letters in given pairs (so requiring to be even-length) as unique letter string

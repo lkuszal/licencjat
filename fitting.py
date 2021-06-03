@@ -1,6 +1,6 @@
 """functions connected with checking goodness of fit of text to model values"""
 import freq
-import collection
+import ciphpy.collection as collection
 model = collection.freq_model
 
 
@@ -46,12 +46,12 @@ def lang_checker(text):
     diff = 0
     if len(scores) == 3:
         n = min([[abs(250 - a), a] for a in collection.thresholds_suppressed.keys()])[1]
-        for x, y in zip(scores, collection.thresholds_suppressed[n]):
+        for x, y in zip(scores, collection.thresholds_suppressed[str(n)]):
             if x > y:
                 diff += x/y
     else:
         n = min([[abs(250 - int(a)), int(a)] for a in collection.thresholds_full.keys()])[1]
-        for x, y in zip(scores, collection.thresholds_full[n]):
+        for x, y in zip(scores, collection.thresholds_full[str(n)]):
             print(x,y)
             if x > y:
                 diff += x/y
