@@ -1,4 +1,4 @@
-from ciphers.pattern import MasterCipher
+from pattern import MasterCipher
 
 
 # Playfair cipher aims to code text by bigrams, using table 5x5 containing whole alphabet (replacing J by I)

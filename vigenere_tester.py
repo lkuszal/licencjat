@@ -1,4 +1,4 @@
-from ciphers.vigenere import Vigenere
+from vigenere import Vigenere
 from collection import word_generator, normalise, suppress, random_text
 
 

@@ -1,6 +1,6 @@
 """bunch of frequently used objects to import into another modules"""
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-from os import path
+
 
 thresholds_suppressed = {
     100: [0.023711712548595852, 0.015380634944193061, 0.02003437686868687],
@@ -14,26 +14,25 @@ thresholds_suppressed = {
 
 
 from json import load
-freq_model = load(open(path.join(path.dirname(__file__),"freq_model.json"), "r"))
-thresholds_full = load(open(path.join(path.dirname(__file__),"threshold_full.json"), "r"))
-letter_freq = load(open(path.join(path.dirname(__file__),"letter_freq.json"), "r"))
+from os import path
+freq_model = load(open(path.join(path.dirname(__file__), "freq_model.json"), "r"))
+thresholds_full = load(open(path.join(path.dirname(__file__), "threshold_full.json"), "r"))
+letter_freq = load(open(path.join(path.dirname(__file__), "letter_freq.json"), "r"))
 
 
 def word_generator(length):
     from random import choices
     return "".join(choices(alph_EN, k=length))
 
-
+from unidecode import unidecode
 def normalise(text):
-    from unidecode import unidecode
     return unidecode(text)
 
 
 def suppress(text):
     temp_text = ""
     for char in text.upper():
-        a = ord(char)
-        if 64 < a < 91:
+        if char.isalpha():
             temp_text += char
     return temp_text
 

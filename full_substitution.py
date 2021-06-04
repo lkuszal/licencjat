@@ -1,7 +1,7 @@
 """substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
 encryption key, referencing alphabet, and delimeter seperating letters, and space seperating words"""
 from collection import alph_EN
-from ciphers.pattern import MasterCipher
+from pattern import MasterCipher
 
 
 class FullSubstitution(MasterCipher):

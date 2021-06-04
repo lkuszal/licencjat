@@ -1,6 +1,6 @@
 """Polyalphabetic rotating cipher (caesar like) with key in latin alphabet format, where letters are denotating
 rotation shift and position of ciphered letter correspond to some letter of key, as modulo of length of key"""
-from ciphers.pattern import MasterCipher
+from pattern import MasterCipher
 
 
 class Vigenere(MasterCipher):

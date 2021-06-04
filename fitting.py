@@ -1,6 +1,6 @@
 """functions connected with checking goodness of fit of text to model values"""
 import freq
-import ciphpy.collection as collection
+import collection as collection
 model = collection.freq_model
 
 

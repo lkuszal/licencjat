@@ -2,7 +2,7 @@ from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, ch
 from vigenere_tester import vigenere_generator
 from freq import poli_frequencies
 from fitting import lang_checker
-from ciphers.vigenere import Vigenere
+from vigenere import Vigenere
 
 
 def vigenere_solver(text):
