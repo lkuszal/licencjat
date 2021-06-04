@@ -34,7 +34,7 @@ class FullSubstitution(MasterCipher):
                 output += self.cipher_key[char]
                 output += self.delimiter
             elif char == " ":
-                output += self.space
+                output = output[:-1] + self.space
             else:
                 output += char
                 output += self.delimiter
@@ -56,7 +56,7 @@ class FullSubstitution(MasterCipher):
 # every dict value should contain encryption key and other values if they are not default
 library = {"Morse code": [['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--',
                           '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..'],
-                          alph_EN, "/", " "],
+                          alph_EN, "/", "//"],
            "multitap": [['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
                         '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'], alph_EN, ".", " "],
            "A1Z26": [[str(x) for x in range(1, 27)], alph_EN, " ", "  "]}
@@ -66,4 +66,4 @@ library = {"Morse code": [['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '...
 if __name__ == "__main__":
     asd = FullSubstitution(*library["Morse code"])
     print(asd.cipher("Chron pulk twoj i szesc flag"))
-    print(asd.decipher("-.-./..../.-./---/-. .--./..-/.-../-.- -/.--/---/.--- .. .../--.././.../-.-. ..-./.-../.-/--."))
+    print(asd.decipher("-.-./..../.-./---/-.//.--./..-/.-../-.-//-/.--/---/.---//..//.../--.././.../-.-.//..-./.-../.-/--./"))
