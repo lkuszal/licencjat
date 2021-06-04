@@ -6,7 +6,7 @@ from pattern import MasterCipher
 
 class FullSubstitution(MasterCipher):
     # creating encryption and decryption dictionaries from encryption keys and reference (same length)
-    def __init__(self, enc_key, reference=alph_EN, delimiter="", space=" "):
+    def __init__(self, enc_key, reference=alph_EN, delimiter=" ", space=" "):
         assert len(enc_key) == len(reference)
         assert delimiter != ''
         trans_dict_de = {}
@@ -59,8 +59,7 @@ library = {"Morse code": [['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '...
                           alph_EN, "/", " "],
            "multitap": [['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
                         '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'], alph_EN, ".", " "],
-           "A1Z26": [[str(x) for x in range(1, 27)], alph_EN, " ", "  "],
-           "A1Z23": [[str(x) for x in range(1, 24)], alph_EN, " ", " "]}
+           "A1Z26": [[str(x) for x in range(1, 27)], alph_EN, " ", "  "]}
 
 
 # testing

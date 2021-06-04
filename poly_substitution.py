@@ -1,72 +1,72 @@
-# substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
-# randomly choosed from few options), but every string has to be unique between letter's collections
 from random import choice
-from ciphpy.collection import alph_EN
+from collection import alph_EN
+from pattern import MasterCipher
 
 
-# key should be double nested list consisting all unique strings, length of reference alphabet, delimeter
-def correct(enc_key, reference, delimeter, const_len):
-    try:
-        iter(reference)
-        if set([type(x) for x in enc_key]) == {list}:
-            if len(enc_key) == len(reference):
-                unnested = [x for y in enc_key for x in y]
-                if len(unnested) == len(set(unnested)):
-                    # checking wheter keys strings are same length, or delimeter is passed
-                    if (delimeter is None) != (const_len is None):
-                        if type(const_len) is int:
-                            if (set([len(x) for x in unnested])) == {const_len}:
-                                return True
-                        elif type(delimeter) is str:
-                            return True
-    except TypeError:
-        pass
-    return False
-
-
-# method for cipher
-def cipher(text, enc_key, reference=alph_EN, delimiter=None, const_len=None, **read_dict):
-    if not correct(enc_key, reference, delimiter, const_len) or not text.isalpha():
-        return False
-    trans_dict = {}
-    for x, y in zip(reference.upper(), enc_key):
-        trans_dict[x] = y
-    output = ''
-    if delimiter is not None:
-        for char in text:
-            if char in trans_dict.keys():
-                output += choice(trans_dict[char]) + delimiter
-            else:
-                return False
-    else:
-        for char in text:
-            if char in trans_dict.keys():
-                print(choice(trans_dict[char]))
-                output += choice(trans_dict[char])
-            else:
-                return False
-    return output
-
-
-# method for decipher
-def decipher(text, enc_key, reference=alph_EN, delimeter=None, const_len=None):
-    if not correct(enc_key, reference, delimeter, const_len):
-        return False
-    trans_dict = {}
-    for x, y in zip(enc_key, reference.upper()):
-        for z in x:
-            trans_dict[z] = y
-    if delimeter is not None:
-        text = text.split(delimeter)
-        return "".join([trans_dict[word] for word in text])
-    else:
-        output = ''
-        for x in range(0, len(text), const_len):
-            output += trans_dict[text[x:x + const_len]]
+class PolySubstitution(MasterCipher):
+    """substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
+    randomly choosed from few options), but every string has to be unique between letter's collections"""
+    def __init__(self, enc_key, reference=alph_EN, delimeter=None, const_len=None, space=" "):
+        unnested_key = [x for y in enc_key for x in y]
+        assert len(unnested_key) == len(set(unnested_key))
+        assert (delimeter is None) != (const_len is None)
+        assert len(enc_key) == len(reference)
+        self.delimeter = delimeter
+        if const_len is not None:
+            try:
+                const_len = int(const_len)
+            except ValueError:
+                assert const_len.isnumeric()
+            assert len(set([len(x) for x in unnested_key])) == 1
+            self.const_len = const_len
+        assert (delimeter != "") or (const_len != str(0))
+        enc_dict = {}
+        dec_dict = {}
+        for x, y in zip(reference.upper(), enc_key):
+            enc_dict[x] = y
+            for z in y:
+                dec_dict[z] = x
+        self.cipher_key = enc_dict
+        self.decipher_key = dec_dict
+        self.space = space
+        
+    def cipher(self, plain_text):
+        output = ""
+        if self.delimeter is None:
+            appendix = ""
+        else:
+            appendix = self.delimeter
+        for word in plain_text.split():
+            for char in word:
+                if char in self.cipher_key:
+                    output += choice(self.cipher_key[char]) + appendix
+                output += self.space
         return output
-
-
+    
+    def decipher(self, ciphered_text):
+        output = ""
+        if self.space != "":
+            if self.delimeter is not None:
+                for word in ciphered_text.split(self.space):
+                    for char in word.split(self.delimeter):
+                        output += self.decipher_key[char]
+                    output += " "
+            else:
+                for word in ciphered_text.split(self.space):
+                    for x in range(0, len(ciphered_text), self.const_len):
+                        output += self.decipher_key[word[x:x+self.const_len]]
+        else:
+            if self.delimeter is not None:
+                for char in ciphered_text.split(self.delimeter):
+                    output += self.decipher_key[char]
+            else:
+                for x in range(0, len(ciphered_text), self.const_len):
+                    output += self.decipher_key[ciphered_text[x:x+self.const_len]]
+        return output
+        
+        
 def key_generator_karolinka(item):
+    """additional function to generate karolinka-like cipher keys"""
     table = [[] for x in range(len(alph_EN))]
     for x in range(len(item)):
         for y in range(len(item)):
@@ -74,12 +74,9 @@ def key_generator_karolinka(item):
     return table
 
 
-# dictionary containing frequently used keys, or empty one, in case of passing additional argument to function,
-# whole value should be collected as a tuple
 library = {"karolinka": [key_generator_karolinka("KAROLINKA"), alph_EN, None, 2]}
-
 # testing
 if __name__ == "__main__":
-    print(key_generator_karolinka("karolinka"))
-    print(cipher("CHRONPULKTWOJISZESCFLAG", *library["karolinka"]))
-    print(decipher("2398574114163482115949726229323925452396649197", *library["karolinka"]))
+    karolinka = PolySubstitution(*library["karolinka"])
+    print(karolinka.cipher("CHRONPULKTWOJISZESCFLAG"))
+    print(karolinka.decipher("2398574114163482115949726229323925452396649197"))

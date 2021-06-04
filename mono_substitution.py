@@ -1,15 +1,15 @@
-# substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
-# not supporting differences between ciphering capitalzations, but keeping cases
+"""substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
+not supporting differences between ciphering capitalzations, but keeping cases"""
 from collection import alph_EN
 from pattern import MasterCipher
 
 
 class MonoSubstitution(MasterCipher):
     """mono substitution aims to replace all selected letters or marks by any other letter or symbol, but length
-    of one"""
-    # init method creates maketrans dicts containing all replacments, if reference contains only one capitalization
-    # of letters cipher will convert both lower and upper letters and keep their capitalization. Reference (english
-    # upper alphabet by default) and ciphered alphabet needs to be same of the same length
+    of one
+    init method creates maketrans dicts containing all replacments, if reference contains only one capitalization
+    f letters cipher will convert both lower and upper letters and keep their capitalization. Reference (english
+    upper alphabet by default) and ciphered alphabet needs to be same of the same length"""
     def __init__(self, enc_key, reference=alph_EN):
         assert len(enc_key) == len(reference)
         cipher_dict, decipher_dict = {}, {}
@@ -27,7 +27,7 @@ class MonoSubstitution(MasterCipher):
         self.cipher_key = str.maketrans(cipher_dict)
         self.decipher_key = str.maketrans(decipher_dict)
 
-    # cipher and decipher methodes use both same method from abc MasterCipher, by simply using string .translate method
+    # cipher and decipher methodes use both same method from abc MasterCipher, by simply using string translate method
     def cipher(self, plain_text):
         return super().cipher(plain_text)
 
