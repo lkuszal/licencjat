@@ -3,6 +3,7 @@ from vigenere_tester import vigenere_generator
 from freq import poli_frequencies
 from fitting import fitter
 from vigenere import Vigenere
+from collection import alph_EN
 
 
 def fitter_cracker(lenght, key_length, sample):
@@ -16,7 +17,10 @@ def fitter_cracker(lenght, key_length, sample):
         for length in length_by_kappa_solver(text):
             chis = []
             for x in poli_lists(poli_frequencies(text, length)):
-                chis.append(caesar_solver(x))
+                temp = []
+                for y in caesar_solver(x):
+                    temp.append([y[0],alph_EN[y[1]]])
+                chis.append(temp)
         for x in chis_scrap(chis):
             vig_obj = Vigenere(x[1])
             plaintext = vig_obj.decipher(text)
@@ -54,4 +58,4 @@ def confidence_2(length):
 
             
 if __name__ == "__main__":
-    pass
+    print(fitter_cracker(1000, 5, 1))

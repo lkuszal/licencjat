@@ -50,3 +50,5 @@ if __name__ == "__main__":
     asd = Vigenere("key")
     print(asd.cipher("Chron pulk twoj i szesc flag"))
     print(asd.decipher("Mlpyr nepi damt m qjiqm jjkk"))
+    aaa = Vigenere("klucz")
+    print(aaa.decipher("Mslqm zffm sgzd k rjpme evla"))

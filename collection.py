@@ -24,6 +24,7 @@ def word_generator(length):
     from random import choices
     return "".join(choices(alph_EN, k=length))
 
+
 from unidecode import unidecode
 def normalise(text):
     return unidecode(text)
@@ -50,4 +51,4 @@ def random_text(length, file="output_lines.txt", file_length=39568):
 
 
 if __name__ == "__main__":
-    pass
+    print(normalise(random_text(500)))

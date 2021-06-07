@@ -19,10 +19,10 @@ class Playfair(MasterCipher):
         assert len(unique) == 25
         self.cipher_key = self.decipher_key = unique
 
-    # cipher method converts all alphabetic characters to upper, deleting other ones. Passing not standard letter
-    # like language specific will raise an error - so whole text should be normalised before ciphering. Method divides
-    # whole text to two-letter length (bigram) and passing it to convert method, returning ciphered bigram
     def cipher(self, plain_text, e=1):
+        """cipher method converts all alphabetic characters to upper, deleting other ones. Passing not standard letter
+        like language specific will raise an error - so whole text should be normalised before ciphering. Method divides
+        whole text to two-letter length (bigram) and passing it to convert method, returning ciphered bigram"""
         plain_text = plain_text.upper().replace("J", "I")
         output = ''
         bigram = ''
@@ -47,11 +47,11 @@ class Playfair(MasterCipher):
     def decipher(self, ciphered_text):
         return self.cipher(ciphered_text, e=-1)
 
-    # convert methods takes single bigram and e-argument telling whether code should be encoded (+1) or decoded (-1)
-    # Method virtualizes 5x5 matrix created from cipher_key (same as decipher_key) and finds coordinats of both letters
-    # from bigram by floor division and modulo (both of 5), and then, based on mutual placement of letters, returning
-    # converted bigram
     def convert(self, bigram, e):
+        """convert methods takes single bigram and e-argument telling whether code should be encoded (+1) or decoded (-1)
+        Method virtualizes 5x5 matrix created from cipher_key (same as decipher_key) and finds coordinats of both letters
+        from bigram by floor division and modulo (both of 5), and then, based on mutual placement of letters, returning
+        converted bigram"""
         table = self.cipher_key
         a = table.index(bigram[0])
         b = table.index(bigram[1])
