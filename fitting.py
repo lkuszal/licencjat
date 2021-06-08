@@ -1,7 +1,7 @@
 """functions connected with checking goodness of fit of text to model values"""
 import freq
-import collection as collection
-model = collection.freq_model
+import collection
+from language_variables import freq_model, thresholds_full, thresholds_suppressed
 
 
 def fitter(text, max_length=3):
@@ -23,7 +23,7 @@ def fitter(text, max_length=3):
             end_frq.append(freq.words_edges_frequencies(text, x, beginning=False))
             wrd_frq.append(freq.short_words_frequencies(text, x))
         all_frq.extend([beg_frq, end_frq, wrd_frq])
-    return [rating(all_frq[x][y], model[x][y]) for x in range(len(all_frq)) for y in range(max_length)]
+    return [rating(all_frq[x][y], freq_model[x][y]) for x in range(len(all_frq)) for y in range(max_length)]
 
 
 def rating(obs, exp):
@@ -45,18 +45,17 @@ def lang_checker(text):
     scores = fitter(text)
     diff = 0
     if len(scores) == 3:
-        n = min([[abs(250 - a), a] for a in collection.thresholds_suppressed.keys()])[1]
-        for x, y in zip(scores, collection.thresholds_suppressed[str(n)]):
+        n = min([[abs(len(text) - a), a] for a in thresholds_suppressed.keys()])[1]
+        for x, y in zip(scores, thresholds_suppressed[str(n)]):
             if x > y:
                 diff += x/y
     else:
-        n = min([[abs(250 - int(a)), int(a)] for a in collection.thresholds_full.keys()])[1]
-        for x, y in zip(scores, collection.thresholds_full[str(n)]):
-            print(x,y)
+        n = min([[abs(len(text) - int(a)), int(a)] for a in thresholds_full.keys()])[1]
+        for x, y in zip(scores, thresholds_full[str(n)]):
             if x > y:
                 diff += x/y
     return diff
     
     
 if __name__ == "__main__":
-    print(fitter(open("pt.txt", "r", encoding="utf-8").read()))
+    pass

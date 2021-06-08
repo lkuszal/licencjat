@@ -1,12 +1,12 @@
 """substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
 encryption key, referencing alphabet, and delimeter seperating letters, and space seperating words"""
-from collection import alph_EN
+from language_variables import alphabet_list
 from pattern import MasterCipher
 
 
 class FullSubstitution(MasterCipher):
     # creating encryption and decryption dictionaries from encryption keys and reference (same length)
-    def __init__(self, enc_key, reference=alph_EN, delimiter=" ", space=" "):
+    def __init__(self, enc_key, reference=alphabet_list, delimiter=" ", space=" "):
         assert len(enc_key) == len(reference)
         assert delimiter != ''
         trans_dict_de = {}
@@ -56,10 +56,10 @@ class FullSubstitution(MasterCipher):
 # every dict value should contain encryption key and other values if they are not default
 library = {"Morse code": [['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', '-.-', '.-..', '--',
                           '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..'],
-                          alph_EN, "/", "//"],
+                          alphabet_list, "/", "//"],
            "multitap": [['2', '22', '222', '3', '33', '333', '4', '44', '444', '5', '55', '555', '6', '66', '666', '7',
-                        '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'], alph_EN, ".", " "],
-           "A1Z26": [[str(x) for x in range(1, 27)], alph_EN, " ", "  "]}
+                        '77', '777', '7777', '8', '88', '888', '9', '99', '999', '9999'], alphabet_list, ".", " "],
+           "A1Z26": [[str(x) for x in range(1, 27)], alphabet_list, " ", "  "]}
 
 
 # testing

@@ -1,6 +1,6 @@
 """substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
 not supporting differences between ciphering capitalzations, but keeping cases"""
-from collection import alph_EN
+from language_variables import alphabet_list
 from pattern import MasterCipher
 
 
@@ -9,7 +9,7 @@ class MonoSubstitution(MasterCipher):
     of one . Init method creates maketrans dicts containing all replacments, if reference contains only one capitalization
     f letters cipher will convert both lower and upper letters and keep their capitalization. Reference (english
     upper alphabet by default) and ciphered alphabet needs to be same of the same length"""
-    def __init__(self, enc_key, reference=alph_EN):
+    def __init__(self, enc_key, reference=alphabet_list):
         assert len(enc_key) == len(reference)
         cipher_dict, decipher_dict = {}, {}
         if reference.islower() or reference.isupper():

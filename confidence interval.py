@@ -3,12 +3,12 @@ from vigenere_tester import vigenere_generator
 from freq import poli_frequencies
 from fitting import fitter
 from vigenere import Vigenere
-from collection import alph_EN
+from language_variables import alphabet_list
 
 
 def fitter_cracker(lenght, key_length, sample):
     """solves random ciphering collecting frequency values for bad and good solvings (made for mass getting
-    frequencies to set thresholds"""
+    frequencies to set thresholds)"""
     good_ones = []
     bad_ones = []
     results = []
@@ -19,7 +19,7 @@ def fitter_cracker(lenght, key_length, sample):
             for x in poli_lists(poli_frequencies(text, length)):
                 temp = []
                 for y in caesar_solver(x):
-                    temp.append([y[0],alph_EN[y[1]]])
+                    temp.append([y[0], alphabet_list[y[1]]])
                 chis.append(temp)
         for x in chis_scrap(chis):
             vig_obj = Vigenere(x[1])
@@ -33,7 +33,7 @@ def fitter_cracker(lenght, key_length, sample):
 
 def confidence_2(length):
     """retuns possible tresholds for given alphas (in code) with values and fit percentages"""
-    good, bad = fitter_cracker(length, 6, 1000)
+    good, bad = fitter_cracker(length, 6, 10)
     good_stats = [[] for x in range(12)]
     for x in good:
         for n, y in enumerate(x):
@@ -59,3 +59,4 @@ def confidence_2(length):
             
 if __name__ == "__main__":
     print(fitter_cracker(1000, 5, 1))
+    print(confidence_2(150))

@@ -1,6 +1,6 @@
 from statistics import mean
 import freq
-from collection import letter_freq, alph_EN
+from language_variables import letter_freq, alphabet_list, model_kappa
 from vigenere_tester import vigenere_generator
 
 
@@ -13,8 +13,7 @@ def chi_square(observed, expected):
     expected_other = 0
     for o, e in zip(observed, expected):
         e *= length_factor
-        if o < 5: ###
-        # if True:
+        if o < 5:
             value += (o-e)**2/e
         else:
             assert expected != 0
@@ -30,7 +29,7 @@ def poli_lists(freq_lists):
     results = []
     for x in freq_lists:
         temp = []
-        for y in alph_EN:
+        for y in alphabet_list:
             temp.append(x.get(y, 0))
         results.append(temp)
     return results
@@ -41,7 +40,7 @@ def cycle_list(input_list):
     return input_list[1:]+[input_list[0]]
 
 
-def square_kappa_difference(kappa_list, kappa=0.05924):
+def square_kappa_difference(kappa_list, kappa=model_kappa):
     """counts mean square error versus given kappa in array and returns it as values list"""
     for x, y in enumerate(kappa_list):
         kappa_list[x] = (y-kappa)**2
@@ -57,7 +56,7 @@ def caesar_solver(freq_list, reference=letter_freq, results=2):
     return sorted(solutions)[:results]
 
 
-def length_by_kappa_solver(text, limit=10, kappa=0.05924):
+def length_by_kappa_solver(text, limit=10, kappa=model_kappa):
     """counts mean kappa value of texts developed from division by every n-th letter with n from 2 to given limit"""
     kappa_for_dif_len = []
     for x in range(2, limit+1):
@@ -92,10 +91,10 @@ def chis_scrap(chis, options=3):
 if __name__ == "__main__":
     pass
     random_cryptotext = vigenere_generator(200, 4)
-    #print(length_by_kappa_solver(random_cryptotext[0]))
-    #print(random_cryptotext[1])
+    # print(length_by_kappa_solver(random_cryptotext[0]))
+    # print(random_cryptotext[1])
     results = []
     for x in poli_lists(freq.poli_frequencies(random_cryptotext[0], 7)):
-        #print(x)
+        # print(x)
         print(caesar_solver(x))
-    #print(results)
+    # print(results)

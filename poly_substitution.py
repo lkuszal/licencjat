@@ -1,12 +1,12 @@
 from random import choice
-from collection import alph_EN
+from language_variables import alphabet_list
 from pattern import MasterCipher
 
 
 class PolySubstitution(MasterCipher):
     """substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
     randomly choosed from few options), but every string has to be unique between letter's collections"""
-    def __init__(self, enc_key, reference=alph_EN, delimeter=None, const_len=None, space=" "):
+    def __init__(self, enc_key, reference=alphabet_list, delimeter=None, const_len=None, space=" "):
         unnested_key = [x for y in enc_key for x in y]
         assert len(unnested_key) == len(set(unnested_key))
         assert (delimeter is None) != (const_len is None)
@@ -67,14 +67,14 @@ class PolySubstitution(MasterCipher):
         
 def key_generator_karolinka(item):
     """additional function to generate karolinka-like cipher keys"""
-    table = [[] for x in range(len(alph_EN))]
+    table = [[] for x in range(len(alphabet_list))]
     for x in range(len(item)):
         for y in range(len(item)):
-            table[alph_EN.index((chr(((ord(item.upper()[x]) - 65 + y) % 26) + 65)))].append(str(x + 1) + str(y + 1))
+            table[alphabet_list.index((chr(((ord(item.upper()[x]) - 65 + y) % 26) + 65)))].append(str(x + 1) + str(y + 1))
     return table
 
 
-library = {"karolinka": [key_generator_karolinka("KAROLINKA"), alph_EN, None, 2]}
+library = {"karolinka": [key_generator_karolinka("KAROLINKA"), alphabet_list, None, 2]}
 # testing
 if __name__ == "__main__":
     karolinka = PolySubstitution(*library["karolinka"])
