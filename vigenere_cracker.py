@@ -1,5 +1,4 @@
-from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, chis_scrap
-from vigenere_tester import vigenere_generator
+from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, chis_scrap, vigenere_generator
 from freq import poli_frequencies
 from vigenere import Vigenere
 from language_variables import alphabet_list
@@ -17,9 +16,8 @@ def vigenere_solver(text):
             chis.append(temp)
         results.extend(chis_scrap(chis))
     results = [x[1] for x in results]
-    print(results)
     return solutions_checker(text, Vigenere, results)
     
     
 if __name__ == "__main__":
-    print(vigenere_solver(vigenere_generator(100, 7)[0]))
+    print(vigenere_solver(vigenere_generator(100, 3)[0]))

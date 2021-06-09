@@ -1,8 +1,8 @@
 from statistics import mean
 import freq
 from language_variables import letter_freq, alphabet_list, model_kappa
-from vigenere_tester import vigenere_generator
-
+from collection import word_generator, normalise, suppress, random_text
+from vigenere import Vigenere
 
 def chi_square(observed, expected):
     """counts pearson chi square test between two list of counted occurances"""
@@ -87,6 +87,15 @@ def chis_scrap(chis, options=3):
         results.append([mean(rate[:x[1]]+[chis[x[1]][1][0]]+rate[x[1]+1:]), key[:x[1]]+chis[x[1]][1][1]+key[x[1]+1:]])
     return results
     
+    
+def vigenere_generator(length, key_length, supresssion=False):
+    """returns text of given length (ciphered by random key of given length) and this key"""
+    key = word_generator(key_length)
+    text = normalise(random_text(length))
+    if supresssion:
+        text = suppress(text)
+    asd = Vigenere(key)
+    return asd.cipher(text), key
     
 if __name__ == "__main__":
     pass

@@ -18,4 +18,5 @@ def solutions_checker(text, cipher_object, results, outcomes=5):
     if approved:
         return True, approved
     else:
-        return False, sorted(mismatched)
+        a = [x[1] for x in sorted(mismatched)]
+        return False, a
