@@ -55,14 +55,18 @@ class Playfair(MasterCipher):
         table = self.cipher_key
         a = table.index(bigram[0])
         b = table.index(bigram[1])
-        a_x, a_y = a//5, a % 5
-        b_x, b_y = b//5, b % 5
+        table_size = 5
+        a_x, a_y = a//table_size, a % table_size
+        b_x, b_y = b//table_size, b % table_size
         if a_x == b_x:
-            return table[a_x*5+(a_y+e) % 5]+table[b_x*5+(b_y+e) % 5]
+            return table[a_x * table_size + (a_y + e) % table_size] + table[
+                b_x * table_size + (b_y + e) % table_size]
         elif a_y == b_y:
-            return table[((a_x+e) % 5)*5+a_y]+table[((b_x+e) % 5)*5+b_y]
+            return table[((a_x + e) % table_size) * table_size + a_y] + \
+               table[((b_x + e) % table_size) * table_size + b_y]
         else:
-            return table[a_x*5+b_y]+table[b_x*5+a_y]
+            return table[a_x * table_size + b_y] + table[b_x * table_size
+                 + a_y]
 
 
 library = {}
