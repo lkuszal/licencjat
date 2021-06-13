@@ -4,6 +4,7 @@ from language_variables import letter_freq, alphabet_list, model_kappa
 from collection import word_generator, normalise, suppress, random_text
 from vigenere import Vigenere
 
+
 def chi_square(observed, expected):
     """counts pearson chi square test between two list of counted occurances"""
     assert len(observed) == len(expected)
@@ -47,7 +48,7 @@ def square_kappa_difference(kappa_list, kappa=model_kappa):
     return kappa_list
 
 
-def caesar_solver(freq_list, reference=letter_freq, results=2):
+def caesar_solver(freq_list, reference=letter_freq, results=4):
     """performs chi square test between two arrays, then cycle first one as long as checks all possibilites"""
     solutions = []
     for x in range(len(freq_list)):

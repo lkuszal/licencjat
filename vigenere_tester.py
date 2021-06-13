@@ -1,13 +1,15 @@
+from random import randint
 from vigenere_cracker import vigenere_solver
 from vigenere_tools import vigenere_generator
 
 
-def vigenere_tester(length, key_length, sample):
+def vigenere_tester(length, sample):
     correct = {True: 0, False: 0}
     mistake = {True: 0, False: 0}
     guessed_length = 0
     common_key_parts = []
     for x in range(sample):
+        key_length = randint(1,10)
         ciphertext, key = vigenere_generator(length, key_length)
         result, asd = vigenere_solver(ciphertext)
         guess_keys = [a[0] for a in asd]
@@ -30,10 +32,8 @@ def vigenere_tester(length, key_length, sample):
                         if common/len(new_key) > top_common:
                             top_common = common/len(new_key)
                 common_key_parts.append(round(top_common, 4))
-
     return correct, mistake, guessed_length, sorted(common_key_parts)
     
     
 if __name__ == "__main__":
-    print(vigenere_tester(150, 3, 100))
-    
+    print(vigenere_tester(1000, 1000))
