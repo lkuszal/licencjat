@@ -1,5 +1,6 @@
 """substitution cipher, where every letter is replaced by another one, or some symbol (but length of one),
 not supporting differences between ciphering capitalzations, but keeping cases"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from language_variables import alphabet_list
 from pattern import MasterCipher
 

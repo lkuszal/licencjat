@@ -1,9 +1,12 @@
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from random import randint
 from vigenere_cracker import vigenere_solver
 from vigenere_tools import vigenere_generator
 
 
 def vigenere_tester(length, sample):
+    """functions that aims to test vigenere cracker function by using it multiple times, and saves results either as
+    good ones or bad ones, so based on that, confidence intervals could be set"""
     correct = {True: 0, False: 0}
     mistake = {True: 0, False: 0}
     guessed_length = 0

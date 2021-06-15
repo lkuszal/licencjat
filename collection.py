@@ -1,16 +1,21 @@
 """bunch of frequently used objects to import into another modules"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
+
 from language_variables import alphabet_list
 def word_generator(length):
+    """function returning random letter sequence of given length"""
     from random import choices
     return "".join(choices(alphabet_list, k=length))
 
 
 from unidecode import unidecode
 def normalise(text):
+    """changing all nonlatin letters to latin"""
     return unidecode(text)
 
 
 def suppress(text):
+    """formating text as capital letter only"""
     temp_text = ""
     for char in text.upper():
         if char.isalpha():

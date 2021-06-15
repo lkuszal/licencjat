@@ -1,6 +1,7 @@
 """simple monoalphabetic rotation cipher with integer as key, and optional reference alphabet (by default full
 upperlatin) if reference alphabet is full lower/upper, ciphering will convert them both to same letter, but will
 keep capitalization"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from pattern import MasterCipher
 
 alph_EN = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

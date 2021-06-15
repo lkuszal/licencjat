@@ -1,5 +1,7 @@
 """substitution cipher for key's symbols of different length than 1, e.g morse code. As arguments, should be passed
 encryption key, referencing alphabet, and delimeter seperating letters, and space seperating words"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
+
 from language_variables import alphabet_list
 from pattern import MasterCipher
 

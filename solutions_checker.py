@@ -1,10 +1,10 @@
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from fitting import lang_checker
 
 
 def solutions_checker(text, cipher_object, results, outcomes=5):
-    """magnum opus of library, from cipher_text returns most probable possibilites of solutions (as key and deciphered text)
-    and also bool value - True if any solutions has been successful matched to language model or false and sorted 5 results
-     by most probable, due to fittness to language model"""
+    """function that tries to rate goodness of fittness of given texts to a language model, returning either false or
+    true as result, depending wheter texts has been classified as correct and sorted by goodness of fit results"""
     approved = []
     mismatched = []
     for x in sorted(results[:outcomes]):

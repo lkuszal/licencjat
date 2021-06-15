@@ -1,11 +1,12 @@
+""" Playfair cipher aims to code text by bigrams, using table 5x5 containing whole alphabet (replacing J by I)
+in given order"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from pattern import MasterCipher
 
 
-# Playfair cipher aims to code text by bigrams, using table 5x5 containing whole alphabet (replacing J by I)
-# in given order
 class Playfair(MasterCipher):
-    # cipher and decipher keys are the same, init method converts given string to one of length 25, containg all
-    # unique letter, first from string, and then filled by not used letter from alphabet in order
+    """cipher and decipher keys are the same, init method converts given string to one of length 25, containg all
+    unique letter, first from string, and then filled by not used letter from alphabet in order"""
     def __init__(self, enc_key):
         assert enc_key.isalpha()
         unique = []

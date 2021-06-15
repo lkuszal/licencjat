@@ -1,3 +1,5 @@
+"""short script for scrapping texts from xmls"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 import xml.dom.minidom as xdom
 import os
 

@@ -1,3 +1,4 @@
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, chis_scrap, vigenere_generator
 from freq import poli_frequencies
 from vigenere import Vigenere
@@ -6,6 +7,8 @@ from solutions_checker import solutions_checker
 
 
 def vigenere_solver(text):
+    """main function of cryptoanalysis part of the library - automaticly solves vigenere cryptogram, as results returns
+    call to solutions_checker"""
     results = []
     for length in length_by_kappa_solver(text):
         chis = []

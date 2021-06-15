@@ -1,4 +1,5 @@
 """functions connected with checking goodness of fit of text to model values"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 import freq
 import collection
 from language_variables import freq_model, thresholds_full, thresholds_suppressed

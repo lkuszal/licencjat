@@ -1,3 +1,5 @@
+"""collection of functions used to break vigenere cipher"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from statistics import mean
 import freq
 from language_variables import letter_freq, alphabet_list, model_kappa

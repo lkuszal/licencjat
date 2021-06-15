@@ -1,3 +1,5 @@
+"""all language dependent variables"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from json import load
 from os import path
 freq_model = load(open(path.join(path.dirname(__file__), "freq_model.json"), "r"))

@@ -1,11 +1,12 @@
+"""substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
+randomly choosed from few options), but every string has to be unique between letter's collections"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from random import choice
 from language_variables import alphabet_list
 from pattern import MasterCipher
 
 
 class PolySubstitution(MasterCipher):
-    """substitution cipher where every letter of suppresed text is replaced by some string (usually choosen by
-    randomly choosed from few options), but every string has to be unique between letter's collections"""
     def __init__(self, enc_key, reference=alphabet_list, delimeter=None, const_len=None, space=" "):
         unnested_key = [x for y in enc_key for x in y]
         assert len(unnested_key) == len(set(unnested_key))

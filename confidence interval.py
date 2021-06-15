@@ -1,3 +1,5 @@
+"""Functions that lets to count different thresholds for language model"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from vigenere_tools import caesar_solver, length_by_kappa_solver, poli_lists, chis_scrap
 from vigenere_tester import vigenere_generator
 from freq import poli_frequencies

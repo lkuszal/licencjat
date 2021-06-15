@@ -1,4 +1,5 @@
 """bunch of functions to examine text's properities connected with frequency, returning dictionary, or list of dicts"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 
 
 def frequencies(item, interval=1, case_sensitive=False):

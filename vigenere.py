@@ -1,5 +1,6 @@
 """Polyalphabetic rotating cipher (caesar like) with key in latin alphabet format, where letters are denotating
 rotation shift and position of ciphered letter correspond to some letter of key, as modulo of length of key"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from pattern import MasterCipher
 from language_variables import alphabet_list
 

@@ -1,10 +1,11 @@
+"""cipher swapping letters in given pairs (so requiring to be even-length) as unique letter string"""
+# Written by Lukasz Cholodecki as part of 2021 thesis
 from pattern import MasterCipher
 
 
-# cipher swapping letters in given pairs (so requiring to be even-length) as unique letter string
 class RevSubstitution(MasterCipher):
-    # creating string maketrans dicts to swap letters. Either converting both letters same way, keeping capitalization
-    # or treating them differently
+    """creating string maketrans dicts to swap letters. Either converting both letters same way, keeping capitalization
+    or treating them differently"""
     def __init__(self, enc_key):
         assert len(enc_key) % 2 == 0
         trans_dict = {}
